@@ -39,8 +39,8 @@ Having trouble with Pages? Check out our [documentation](https://docs.github.com
 
 # Hello World
 
-``` java
-	public static void main(String[] args) {
-		System.out.println("Hello World");
-	}
+```java
+public static void main(String[] args) {
+	System.out.println("Hello World");
+}
 ```
