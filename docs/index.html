@@ -20,13 +20,13 @@
   <div id="app">加载中 ...</div>
   <script>
     window.$docsify = {
-      alias: {
-        '/zh/.*/_sidebar.md': '/zh/_sidebar.md',
-        '/en/.*/_sidebar.md': '/en/_sidebar.md',
-        '/.*/_navbar.md': '/_navbar.md',
-        '/zh/(.*)': 'zh/$1',
-        '/en/(.*)': 'en/$1',
-      },
+      // alias: {
+      //   '/zh/.*/_sidebar.md': '/zh/_sidebar.md',
+      //   '/en/.*/_sidebar.md': '/en/_sidebar.md',
+      //   '/.*/_navbar.md': '/_navbar.md',
+      //   '/zh/(.*)': 'zh/$1',
+      //   '/en/(.*)': 'en/$1',
+      // },
       auto2top: true,
       // Only coverpage is loaded when visiting the home page.
       onlyCover: true,
@@ -78,7 +78,7 @@
                 .replace('raw.githubusercontent.com', 'github.com')
                 .replace(/\/master/, '/blob/master')
             } else {
-              url = 'https://github.com/selfancy/blog/master/docs/' + vm.route.file
+              url = 'https://github.com/selfancy/blog/blob/master/docs/' + vm.route.file
             }
             var editHtml = '[:memo: Edit Document](' + url + ')\n\n'
 
