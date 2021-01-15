@@ -21,12 +21,7 @@
   <script>
     window.$docsify = {
       alias: {
-        // '/zh/.*/_sidebar.md': '/zh/_sidebar.md',
-        // '/en/.*/_sidebar.md': '/en/_sidebar.md',
-        // '/.*/README.md': '/_coverpage.md',
         '/.*/README.md': '/_sidebar.md'
-        // '/zh/(.*)': 'zh/$1',
-        // '/en/(.*)': 'en/$1',
       },
       auto2top: true,
       // Only coverpage is loaded when visiting the home page.
@@ -70,6 +65,12 @@
           '/': 'Copied',
         },
       },
+      pagination: {
+          previousText: '上一章节',
+          nextText: '下一章节',
+          crossChapter: true,
+          crossChapterText: true,
+      },
       plugins: [
         // Edit Document Button in each page
         function (hook, vm) {
@@ -106,6 +107,7 @@
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <!-- Add a simple Click to copy button to all preformatted code blocks to effortlessly allow users to copy example code from your docs -->
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
 
   <!-- code highlight -->
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
