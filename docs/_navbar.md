@@ -1,5 +1,4 @@
 - 入门
-
   - [Hello World](java/helloworld.md)
   - [多页文档](java/next.md)
   - [定制导航栏](zh-cn/custom-navbar.md)
