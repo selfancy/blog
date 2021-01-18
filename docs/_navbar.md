@@ -1,7 +1,7 @@
 - 入门
 
-  - [Hello World](Java/helloworld.md)
-  - [多页文档](zh-cn/more-pages.md)
+  - [Hello World](java/helloworld.md)
+  - [多页文档](java/next.md)
   - [定制导航栏](zh-cn/custom-navbar.md)
   - [封面](zh-cn/cover.md)
 
