@@ -10,18 +10,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
   <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
   <!-- Stylesheets -->
-<!--  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" title="Simple">-->
-<!--  <link rel="stylesheet" href="assets/css/main.css">-->
-
-<!--  &lt;!&ndash; Alternate Stylesheets &ndash;&gt;-->
-  <link rel="stylesheet alternate" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css" title="Defaults">
-  <link rel="stylesheet alternate" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css" title="Simple Dark">
-
-  <!-- Test Stylesheets -->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/themes/vue.css"> -->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/themes/buble.css"> -->
-  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/themes/dark.css"> -->
-<!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/themes/pure.css">-->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" id="theme-css">
+  <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body>
@@ -29,22 +20,22 @@
   <script>
     window.$docsify = {
       alias: {
-        // '/.*/README.md': '/_sidebar.md',
         '/.*/_sidebar.md': '/_sidebar.md'
       },
+      routerMode: 'hash', // default: 'hash',
       auto2top: true,
       // Only coverpage is loaded when visiting the home page.
       onlyCover: true,
-      coverpage: false,
+      // coverpage: true,
       loadSidebar: true,
+      autoHeader: true,
       loadNavbar: true,
       mergeNavbar: true,
-      autoHeader: true,
-      maxLevel: 3,
-      subMaxLevel: 3,
+      maxLevel: 6,
+      subMaxLevel: 5,
       executeScript: true,
-      name: 'selfancy的博客',
-      repo: 'https://github.com/selfancy',
+      name: 'selfancy 的博客',
+      repo: 'selfancy',
       search: {
         noData: '没有结果!',
         paths: 'auto',
@@ -53,7 +44,7 @@
       copyCode: {
         buttonText : '点击复制',
         errorText  : '复制错误',
-        successText: '已复制'  
+        successText: '已复制'
       },
       pagination: {
           previousText: '上一章节',
@@ -61,11 +52,20 @@
           crossChapter: true,
           crossChapterText: true
       },
-      // darkMode: {
-      //   light: {
-      //     toggleBtnBg: "#42b983"
-      //   }
-      // },
+      darkMode: {
+          light: {
+              background: '#1c2022',
+              toggleBtnBg: '#34495e',
+              textColor: '#b4b4b4',
+              themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css'
+          },
+          dark: {
+              background: 'white',
+              toggleBtnBg: 'var(--theme-color)',
+              textColor: 'var(--theme-color)',
+              themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css'
+          }
+      },
       plugins: [
         // Edit Document Button in each page
         function (hook, vm) {
@@ -86,33 +86,34 @@
     };
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/docsify-dark-mode@latest/dist/index.min.js"></script> -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+  <script src="assets/js/main.js"></script>
 
   <!-- plugins -->
   <!-- support emoji -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/emoji.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/emoji.min.js"></script>
   <!-- support search -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
   <!-- Support docsify sidebar catalog expand and collapse -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
   <!-- Medium's image zoom -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <!-- Add a simple Click to copy button to all preformatted code blocks to effortlessly allow users to copy example code from your docs -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code"></script>
-  <script src="https://unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
 
   <!-- code highlight -->
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-markdown.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-nginx.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-properties.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-sql.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-xml-doc.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-markdown.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-nginx.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-properties.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-sql.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-xml-doc.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
 </body>
 
 </html>

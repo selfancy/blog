@@ -3,8 +3,6 @@
   - [多页文档](java/next.md)
   - [定制导航栏](zh-cn/custom-navbar.md)
   - [封面](zh-cn/cover.md)
-
-
 - 配置
   - [配置项](zh-cn/configuration.md)
   - [主题](zh-cn/themes.md)
