@@ -1,3 +1,6 @@
+/**
+ * dark mode
+ */
 const plugin = (hook, vm) => {
     var trans = () => {
         document.documentElement.classList.add('transition')

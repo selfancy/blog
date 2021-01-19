@@ -64,10 +64,25 @@ html.transition, html.transition *, html.transition :after, html.transition :bef
 #dark_mode {
     position: absolute;
     right: 0;
-    /*top: 0*/
+    top: 8%;
 }
 
 /*p {*/
 /*    color: var(--theme-color);*/
 /*    color: var(--text_color)*/
 /*}*/
+.sidebar-nav ul:not(.app-sub-sidebar)>li:not(.file)::before {
+    left: -15px;
+    height: 7px;
+    width: 7px;
+}
+
+.sidebar-nav li.folder {
+    font-size: 16px;
+    left: 10%;
+    margin-bottom: 2%;
+}
+
+aside.toc-nav {
+    z-index: 10 !important;
+}

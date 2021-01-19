@@ -1,12 +1,12 @@
-- [![Java](../assets/img/java.svg) java](java)
+- ![Java](../assets/img/java.svg) Java
     - [Hello World](java/helloworld.md)
     - [测试文章](java/next.md)
-- [![Mysql](../assets/img/mysql.svg) mysql](mysql)
+- ![Mysql](../assets/img/mysql.svg) MySQL
     - [Hello World](mysql/helloworld.md)
     - [测试文章](mysql/next.md)
-- [![Linux](../assets/img/linux.svg) linux](linux)
+- ![Linux](../assets/img/linux.svg) Linux
     - [Hello World](linux/helloworld.md)
     - [测试文章](linux/next.md)
-- [![Python](../assets/img/python.svg) python](python)
+- ![Python](../assets/img/python.svg) Python
     - [Hello World](python/helloworld.md)
     - [测试文章](python/next.md)
