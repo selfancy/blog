@@ -1,4 +1,4 @@
-- ![Java](../assets/img/java.svg) Java
+- ![Java](../assets/img/java.svg) Java1
     - [Hello World](java/helloworld.md)
     - [测试文章](java/next.md)
 - ![Mysql](../assets/img/mysql.svg) MySQL
