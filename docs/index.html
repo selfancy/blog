@@ -12,86 +12,17 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-defaults.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" id="theme-css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body>
 <div id="app">加载中 ...</div>
-<script>
-    window.$docsify = {
-        alias: {
-            '/.*/_sidebar.md': '/_sidebar.md'
-        },
-        routerMode: 'hash', // default: 'hash',
-        auto2top: false,
-        // Only coverpage is loaded when visiting the home page.
-        onlyCover: true,
-        // coverpage: true,
-        loadSidebar: true,
-        autoHeader: true,
-        loadNavbar: true,
-        mergeNavbar: true,
-        maxLevel: 3,
-        subMaxLevel: 3,
-        executeScript: true,
-        name: 'selfancy 的博客',
-        repo: 'selfancy',
-        search: {
-            noData: '没有结果!',
-            paths: 'auto',
-            placeholder: '搜索'
-        },
-        copyCode: {
-            buttonText: '点击复制',
-            errorText: '复制错误',
-            successText: '已复制'
-        },
-        pagination: {
-            previousText: '上一章节',
-            nextText: '下一章节',
-            crossChapter: true,
-            crossChapterText: true
-        },
-        toc: {
-            tocMaxLevel: 5,
-            target: "h2, h3, h4, h5, h6",
-        },
-        darkMode: {
-            light: {
-                background: '#1c2022',
-                toggleBtnBg: '#34495e',
-                textColor: '#b4b4b4',
-                themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css'
-            },
-            dark: {
-                background: 'white',
-                toggleBtnBg: 'var(--theme-color)',
-                textColor: 'var(--theme-color)',
-                themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css'
-            }
-        },
-        plugins: [
-            // Edit Document Button in each page
-            function (hook, vm) {
-                hook.beforeEach(function (html) {
-                    if (/githubusercontent\.com/.test(vm.route.file)) {
-                        url = vm.route.file
-                            .replace('raw.githubusercontent.com', 'github.com')
-                            .replace(/\/master/, '/blob/master')
-                    } else {
-                        url = 'https://github.com/selfancy/blog/blob/master/docs/' + vm.route.file
-                    }
-                    var editHtml = '[:memo: 编辑](' + url + ')\n\n'
 
-                    return editHtml + html;
-                })
-            },
-        ],
-    };
-</script>
-
+<!-- Scripts -->
 <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 <script src="assets/js/main.js"></script>
 
 <!-- plugins -->
@@ -108,8 +39,7 @@
 <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
 <script src="//unpkg.com/docsify/lib/plugins/external-script.min.js"></script>
 <script src="//unpkg.com/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-plugin-toc@1.1.0/dist/docsify-plugin-toc.min.js"></script>
-
+<script src="//unpkg.com/docsify-plugin-toc"></script>
 
 <!-- code highlight -->
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
@@ -122,6 +52,8 @@
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-sql.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-xml-doc.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+
+
 </body>
 
 </html>

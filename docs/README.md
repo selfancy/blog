@@ -36,11 +36,49 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
 
+## 流程图一
+```mermaid
+sequenceDiagram
+Alice->>+John: Hello John, how are you?
+Alice->>+John: John, can yoy hear me?
+John-->>-Alice: Hi Alice, I can hear you!
+John-->>-Alice: I feel great!
+```
+## 流程图二
+```mermaid
+graph TD
+  id1[A] --> id2{B}
+  id2{B} -- YES --> id3[C]
+  id2{B} -- NO --> id4{D}
+  id4{D} -- YES --> id5[E]
+  id4{D} -- NO --> id6[F]
+```
+## 执行器触发流程
+``` mermaid
+graph TB
+admin[admin]
+client[客户端]
+triggerQueue[调度队列]
+triggerRemote[执行远程调度]
+executorQueue[执行队列]
+executeMethod[执行任务方法]
+handleResult[执行结果]
+callbackQueue[回调队列]
 
-# Hello World
+subgraph admin调度中心
+admin-.->|调度触发|triggerQueue
+triggerQueue-.-|循环监听队列调度|triggerRemote
+end
 
-```java
-public static void main(String[] args) {
-	System.out.println("Hello World");
-}
+triggerRemote-.-|新增执行记录|client
+triggerRemote-->client
+client-.-|更新调度结果|admin
+
+subgraph 客户端执行器
+client-.->|接收调度任务, 放入待执行队列|executorQueue
+executorQueue-.->|循环监听队列任务|executeMethod
+executeMethod-->handleResult
+handleResult-->|放入回调队列|callbackQueue
+callbackQueue-.->|循环监听队列回调, admin接收更新执行结果|admin
+end
 ```

@@ -1,7 +1,7 @@
 /**
  * dark mode
  */
-const plugin = (hook, vm) => {
+const darkModePlugin = (hook, vm) => {
     var trans = () => {
         document.documentElement.classList.add('transition')
         window.setTimeout(() => {
@@ -9,18 +9,12 @@ const plugin = (hook, vm) => {
         }, 800)
     }
     var setColor = ({background, toggleBtnBg, textColor, themeLink }) => {
-        document.documentElement.style.setProperty(
-            '--docsify_dark_mode_btn',
-            toggleBtnBg
-        )
+        document.documentElement.style.setProperty('--docsify_dark_mode_btn', toggleBtnBg)
         var themeDom = document.getElementById('theme-css');
         if (themeDom && themeLink) {
             themeDom.setAttribute('href', themeLink);
         } else {
-            document.documentElement.style.setProperty(
-                '--docsify_dark_mode_bg',
-                background
-            )
+            document.documentElement.style.setProperty('--docsify_dark_mode_bg', background)
             document.documentElement.style.setProperty('--text_color', textColor)
         }
     }
@@ -85,4 +79,89 @@ const plugin = (hook, vm) => {
     })
 }
 
-window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins)
+var num = 0;
+// default, forest, dark, neutral
+mermaid.initialize({ startOnLoad: false, theme: 'default'});
+window.$docsify = {
+    alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+    },
+    routerMode: 'hash', // default: 'hash',
+    auto2top: false,
+    // Only coverpage is loaded when visiting the home page.
+    onlyCover: true,
+    // coverpage: true,
+    loadSidebar: true,
+    autoHeader: true,
+    loadNavbar: true,
+    mergeNavbar: true,
+    maxLevel: 3,
+    subMaxLevel: 3,
+    executeScript: true,
+    name: 'selfancy 的博客',
+    repo: 'selfancy',
+    search: {
+        noData: '没有结果!',
+        paths: 'auto',
+        placeholder: '搜索'
+    },
+    copyCode: {
+        buttonText: '点击复制',
+        errorText: '复制错误',
+        successText: '已复制'
+    },
+    pagination: {
+        previousText: '上一章节',
+        nextText: '下一章节',
+        crossChapter: true,
+        crossChapterText: true
+    },
+    toc: {
+        tocMaxLevel: 5,
+        target: "h2, h3, h4, h5, h6",
+    },
+    darkMode: {
+        light: {
+            background: '#1c2022',
+            toggleBtnBg: '#34495e',
+            textColor: '#b4b4b4',
+            themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css'
+        },
+        dark: {
+            background: 'white',
+            toggleBtnBg: 'var(--theme-color)',
+            textColor: 'var(--theme-color)',
+            themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css'
+        }
+    },
+    plugins: [
+        // Edit Document Button in each page
+        function (hook, vm) {
+            hook.beforeEach(function (html) {
+                if (/githubusercontent\.com/.test(vm.route.file)) {
+                    url = vm.route.file
+                        .replace('raw.githubusercontent.com', 'github.com')
+                        .replace(/\/master/, '/blob/master')
+                } else {
+                    url = 'https://github.com/selfancy/blog/blob/master/docs/' + vm.route.file
+                }
+                var editHtml = '[:memo: 编辑](' + url + ')\n\n'
+
+                return editHtml + html;
+            })
+        },
+        darkModePlugin
+    ],
+    markdown: {
+        renderer: {
+            code: function (code, lang) {
+                if (lang === "mermaid") {
+                    return (
+                        '<div class="mermaid">' + mermaid.render('mermaid-svg-' + num++, code) + "</div>"
+                    );
+                }
+                return this.origin.code.apply(this, arguments);
+            }
+        }
+    }
+};
