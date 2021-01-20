@@ -100,10 +100,9 @@ const editOnGithubPlugin = function (hook, vm) {
 const gitalk = new Gitalk({
     clientID: '0c1bebfe0ee17ef36a6d',
     clientSecret: 'c7e508fd3f4243f9c79262f4414ec80ef6010af6',
-    repo: 'https://github.com/selfancy/blog',
+    repo: 'blog',
     owner: 'selfancy',
     admin: ['selfancy'],
-    labels: ['Gitalk'],
     // facebook-like distraction free mode
     distractionFreeMode: false,
     id: location.pathname
@@ -183,6 +182,12 @@ window.$docsify = {
     toc: {
         tocMaxLevel: 5,
         target: "h2, h3, h4, h5, h6",
+    },
+    count:{
+        countable:true,
+        fontsize:'0.9em',
+        color:'rgb(90,90,90)',
+        language:'chinese'
     },
     darkMode: {
         light: {
