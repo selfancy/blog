@@ -147,9 +147,10 @@ var num = 0;
 mermaid.initialize({ startOnLoad: false, theme: 'default'});
 window.$docsify = {
     alias: {
-        '/.*/_sidebar.md': '/_sidebar.md'
+        '/.*/_sidebar.md': '/_sidebar.md',
+        '/.*/_navbar.md': '/_navbar.md'
     },
-    routerMode: 'hash', // default: 'hash',
+    routerMode: 'history', // default: 'hash',
     basePath: '/',
     auto2top: true,
     // Only coverpage is loaded when visiting the home page.
@@ -213,7 +214,7 @@ window.$docsify = {
     footer: {
         copy: '<span>Acme &copy; 2020</span>',
         auth: 'by Me',
-        pre: '<hr/>',
+        pre: '',
         style: 'text-align: right;',
     },
     plugins: [
