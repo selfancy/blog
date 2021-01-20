@@ -103,7 +103,6 @@ const gitalk = new Gitalk({
     repo: 'blog',
     owner: 'selfancy',
     admin: ['selfancy'],
-    // facebook-like distraction free mode
     distractionFreeMode: false,
     title: location.hash.match(/#(.*?)([?]|$)/)[1],
     id: location.hash.match(/#(.*?)([?]|$)/)[1]
