@@ -78,6 +78,68 @@ const darkModePlugin = (hook, vm) => {
         })
     })
 }
+/**
+ * edit on github plugin
+ */
+const editOnGithubPlugin = function (hook, vm) {
+    hook.beforeEach(function (html) {
+        if (/githubusercontent\.com/.test(vm.route.file)) {
+            url = vm.route.file
+                .replace('raw.githubusercontent.com', 'github.com')
+                .replace(/\/master/, '/blob/master')
+        } else {
+            url = 'https://github.com/selfancy/blog/blob/master/docs/' + vm.route.file
+        }
+        var editHtml = '[:memo: 编辑](' + url + ')\n'
+        return editHtml + html;
+    })
+};
+/**
+ * gitalk plugin
+ */
+const gitalkPlugin = function (hook, vm) {
+    hook.mounted(function() {
+        var div = Docsify.dom.create('div')
+        div.id = 'gitalk-container'
+        var main = Docsify.dom.getNode('#main')
+        div.style = `width: ${main.clientWidth}px; margin: 0 auto 20px;`
+        Docsify.dom.appendTo(Docsify.dom.find('.content'), div)
+    })
+
+    hook.doneEach(function() {
+        var el = document.getElementById('gitalk-container')
+        while(el.hasChildNodes()) el.removeChild(el.firstChild)
+        gitalk.render('gitalk-container')
+    })
+};
+
+const gitalk = new Gitalk({
+    clientID: '0c1bebfe0ee17ef36a6d',
+    clientSecret: 'c7e508fd3f4243f9c79262f4414ec80ef6010af6',
+    repo: 'https://github.com/selfancy/blog',
+    owner: 'selfancy',
+    admin: ['selfancy'],
+    // facebook-like distraction free mode
+    distractionFreeMode: false,
+    id: location.href
+});
+
+// window.onhashchange = function (event) {
+//     if (event.newURL.split('?')[0] !== event.oldURL.split('?')[0]) {
+//         location.reload()
+//     }
+// }
+
+/**
+ *  last updated plugin
+ */
+const lastUpdatedPlugin = function (hook, vm) {
+    hook.beforeEach(function (html) {
+        return html
+            + '<hr/>'
+            + '上次更新：{docsify-updated} '
+    })
+};
 
 var num = 0;
 // default, forest, dark, neutral
@@ -96,10 +158,11 @@ window.$docsify = {
     loadNavbar: true,
     mergeNavbar: true,
     maxLevel: 2,
-    subMaxLevel: 1,
+    subMaxLevel: 2,
     executeScript: true,
     name: 'selfancy 的博客',
     repo: 'selfancy',
+    formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
     search: {
         noData: '没有结果!',
         paths: 'auto',
@@ -146,21 +209,10 @@ window.$docsify = {
         style: 'text-align: right;',
     },
     plugins: [
-        // Edit Document Button in each page
-        function (hook, vm) {
-            hook.beforeEach(function (html) {
-                if (/githubusercontent\.com/.test(vm.route.file)) {
-                    url = vm.route.file
-                        .replace('raw.githubusercontent.com', 'github.com')
-                        .replace(/\/master/, '/blob/master')
-                } else {
-                    url = 'https://github.com/selfancy/blog/blob/master/docs/' + vm.route.file
-                }
-                var editHtml = '[:memo: 编辑](' + url + ')\n\n'
-                return editHtml + html;
-            })
-        },
-        darkModePlugin
+        editOnGithubPlugin,
+        gitalkPlugin,
+        darkModePlugin,
+        lastUpdatedPlugin,
     ],
     markdown: {
         renderer: {
