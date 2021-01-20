@@ -150,6 +150,7 @@ window.$docsify = {
         '/.*/_sidebar.md': '/_sidebar.md',
         '/.*/_navbar.md': '/_navbar.md'
     },
+    basePath: 'https://cdn.jsdelivr.net/gh/selfancy/blog@master/docs/',
     routerMode: 'hash', // default: 'hash',
     auto2top: true,
     // Only coverpage is loaded when visiting the home page.
