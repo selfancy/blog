@@ -150,8 +150,7 @@ window.$docsify = {
         '/.*/_sidebar.md': '/_sidebar.md',
         '/.*/_navbar.md': '/_navbar.md'
     },
-    routerMode: 'history', // default: 'hash',
-    basePath: '/',
+    routerMode: 'hash', // default: 'hash',
     auto2top: true,
     // Only coverpage is loaded when visiting the home page.
     onlyCover: true,
