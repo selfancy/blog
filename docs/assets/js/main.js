@@ -103,6 +103,7 @@ const gitalk = new Gitalk({
     repo: 'https://github.com/selfancy/blog',
     owner: 'selfancy',
     admin: ['selfancy'],
+    labels: ['Gitalk'],
     // facebook-like distraction free mode
     distractionFreeMode: false,
     id: location.pathname
