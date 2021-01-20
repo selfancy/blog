@@ -105,8 +105,16 @@ const gitalk = new Gitalk({
     admin: ['selfancy'],
     // facebook-like distraction free mode
     distractionFreeMode: false,
-    id: location.pathname
+    title: location.hash.match(/#(.*?)([?]|$)/)[1],
+    id: location.hash.match(/#(.*?)([?]|$)/)[1]
 });
+
+// 监听URL中hash的变化，如果发现换了一个MD文件，那么刷新页面，解决整个网站使用一个gitalk评论issues的问题。
+window.onhashchange = function(event){
+    if(event.newURL.split('?')[0] !== event.oldURL .split('?')[0]) {
+        location.reload()
+    }
+}
 
 const gitalkPlugin = function (hook, vm) {
     hook.mounted(function() {
@@ -216,7 +224,7 @@ window.$docsify = {
     },
     plugins: [
         editOnGithubPlugin,
-        gitalkPlugin,
+        // gitalkPlugin,
         darkModePlugin,
         lastUpdatedPlugin,
     ],
