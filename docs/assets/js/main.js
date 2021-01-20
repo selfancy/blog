@@ -163,6 +163,7 @@ window.$docsify = {
     subMaxLevel: 2,
     executeScript: true,
     name: 'selfancy 的博客',
+    nameLink: '/#/',
     repo: 'selfancy',
     formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
     search: {
@@ -218,7 +219,7 @@ window.$docsify = {
     },
     plugins: [
         editOnGithubPlugin,
-        gitalkPlugin,
+        //gitalkPlugin,
         darkModePlugin,
         lastUpdatedPlugin,
     ],
