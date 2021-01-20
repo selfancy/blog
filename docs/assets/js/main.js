@@ -132,12 +132,6 @@ const gitalkPlugin = function (hook, vm) {
     })
 };
 
-// window.onhashchange = function (event) {
-//     if (event.newURL.split('?')[0] !== event.oldURL.split('?')[0]) {
-//         location.reload()
-//     }
-// }
-
 /**
  *  last updated plugin
  */
@@ -224,7 +218,7 @@ window.$docsify = {
     },
     plugins: [
         editOnGithubPlugin,
-        // gitalkPlugin,
+        gitalkPlugin,
         darkModePlugin,
         lastUpdatedPlugin,
     ],
