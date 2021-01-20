@@ -97,6 +97,17 @@ const editOnGithubPlugin = function (hook, vm) {
 /**
  * gitalk plugin
  */
+const gitalk = new Gitalk({
+    clientID: '0c1bebfe0ee17ef36a6d',
+    clientSecret: 'c7e508fd3f4243f9c79262f4414ec80ef6010af6',
+    repo: 'https://github.com/selfancy/blog',
+    owner: 'selfancy',
+    admin: ['selfancy'],
+    // facebook-like distraction free mode
+    distractionFreeMode: false,
+    id: location.pathname
+});
+
 const gitalkPlugin = function (hook, vm) {
     hook.mounted(function() {
         var div = Docsify.dom.create('div')
@@ -112,17 +123,6 @@ const gitalkPlugin = function (hook, vm) {
         gitalk.render('gitalk-container')
     })
 };
-
-const gitalk = new Gitalk({
-    clientID: '0c1bebfe0ee17ef36a6d',
-    clientSecret: 'c7e508fd3f4243f9c79262f4414ec80ef6010af6',
-    repo: 'https://github.com/selfancy/blog',
-    owner: 'selfancy',
-    admin: ['selfancy'],
-    // facebook-like distraction free mode
-    distractionFreeMode: false,
-    id: location.pathname
-});
 
 // window.onhashchange = function (event) {
 //     if (event.newURL.split('?')[0] !== event.oldURL.split('?')[0]) {
