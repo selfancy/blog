@@ -87,12 +87,12 @@ window.$docsify = {
         '/.*/_sidebar.md': '/_sidebar.md'
     },
     routerMode: 'hash', // default: 'hash',
-    auto2top: false,
+    auto2top: true,
     // Only coverpage is loaded when visiting the home page.
     onlyCover: true,
     // coverpage: true,
     loadSidebar: true,
-    autoHeader: true,
+    autoHeader: false,
     loadNavbar: true,
     mergeNavbar: true,
     maxLevel: 3,
@@ -146,7 +146,6 @@ window.$docsify = {
                     url = 'https://github.com/selfancy/blog/blob/master/docs/' + vm.route.file
                 }
                 var editHtml = '[:memo: 编辑](' + url + ')\n\n'
-
                 return editHtml + html;
             })
         },
