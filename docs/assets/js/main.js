@@ -88,7 +88,7 @@ const editOnGithubPlugin = function (hook, vm) {
                 .replace('raw.githubusercontent.com', 'github.com')
                 .replace(/\/master/, '/blob/master')
         } else {
-            url = 'https://github.com/selfancy/blog/blob/master/docs/' + vm.route.file
+            url = 'https://github.com/selfancy/blog/edit/master/docs/' + vm.route.file
         }
         var editHtml = '[:memo: 编辑](' + url + ')\n'
         return editHtml + html;
