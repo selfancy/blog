@@ -121,7 +121,7 @@ const gitalk = new Gitalk({
     admin: ['selfancy'],
     // facebook-like distraction free mode
     distractionFreeMode: false,
-    id: location.href
+    id: location.pathname
 });
 
 // window.onhashchange = function (event) {
