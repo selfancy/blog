@@ -1,12 +1,14 @@
 - ![Java](../assets/img/java.svg) Java
-    - [Hello World](java/helloworld.md)
-    - [测试文章](java/next.md)
+  - [Hello World](java/helloworld.md)
+  - [测试文章](java/next.md)
 - ![Mysql](../assets/img/mysql.svg) MySQL
-    - [Hello World](mysql/helloworld.md)
-    - [测试文章](mysql/next.md)
+  - [Hello World](mysql/helloworld.md)
+  - [测试文章](mysql/next.md)
 - ![Linux](../assets/img/linux.svg) Linux
-    - [Hello World](linux/helloworld.md)
-    - [测试文章](linux/next.md)
+  - [Hello World](linux/helloworld.md)
+  - [测试文章](linux/next.md)
 - ![Python](../assets/img/python.svg) Python
-    - [Hello World](python/helloworld.md)
-    - [测试文章](python/next.md)
+  - [Hello World](python/helloworld.md)
+  - [测试文章](python/next.md)
+
+<div id="mb-footer"></div>

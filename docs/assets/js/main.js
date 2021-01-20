@@ -95,8 +95,8 @@ window.$docsify = {
     autoHeader: false,
     loadNavbar: true,
     mergeNavbar: true,
-    maxLevel: 3,
-    subMaxLevel: 3,
+    maxLevel: 2,
+    subMaxLevel: 1,
     executeScript: true,
     name: 'selfancy 的博客',
     repo: 'selfancy',
@@ -133,6 +133,17 @@ window.$docsify = {
             textColor: 'var(--theme-color)',
             themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css'
         }
+    },
+    // autoFooter: {
+    //     name: 'mike',
+    //     copyYear: '2018-2021',
+    //     url: 'https://www.selfancy.com'
+    // },
+    footer: {
+        copy: '<span>Acme &copy; 2020</span>',
+        auth: 'by Me',
+        pre: '<hr/>',
+        style: 'text-align: right;',
     },
     plugins: [
         // Edit Document Button in each page
