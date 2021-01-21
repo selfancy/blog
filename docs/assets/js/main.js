@@ -92,45 +92,46 @@ const editOnGithubPlugin = function (hook, vm) {
         }
         var editHtml = '[:memo: 编辑](' + url + ')\n'
         return editHtml + html;
-    })
+    });
 };
 /**
  * gitalk plugin
  */
-const gitalk = new Gitalk({
+const gitalkConfig = {
     clientID: '0c1bebfe0ee17ef36a6d',
     clientSecret: 'c7e508fd3f4243f9c79262f4414ec80ef6010af6',
+    // clientID: '90fb80750f5bf03c8845',
+    // clientSecret: 'efe7505d473f25a3dde489630e511af3e3763480',
     repo: 'blog',
     owner: 'selfancy',
     admin: ['selfancy'],
-    distractionFreeMode: false,
-    title: location.hash.match(/#(.*?)([?]|$)/)[1],
-    id: location.hash.match(/#(.*?)([?]|$)/)[1]
-});
-
-// 监听URL中hash的变化，如果发现换了一个MD文件，那么刷新页面，解决整个网站使用一个gitalk评论issues的问题。
-window.onhashchange = function(event){
-    if(event.newURL.split('?')[0] !== event.oldURL .split('?')[0]) {
-        location.reload()
-    }
-}
-
-const gitalkPlugin = function (hook, vm) {
-    hook.mounted(function() {
-        var div = Docsify.dom.create('div')
-        div.id = 'gitalk-container'
-        var main = Docsify.dom.getNode('#main')
-        div.style = `width: ${main.clientWidth}px; margin: 0 auto 20px;`
-        Docsify.dom.appendTo(Docsify.dom.find('.content'), div)
-    })
-
-    hook.doneEach(function() {
-        var el = document.getElementById('gitalk-container')
-        while(el.hasChildNodes()) el.removeChild(el.firstChild)
-        gitalk.render('gitalk-container')
-    })
+    distractionFreeMode: false
 };
 
+const gitalkPlugin = function (hook, vm) {
+    hook.doneEach(function() {
+        var label, domObj, main, divEle, gitalk;
+        label = vm.route.path.split("/").pop();
+        domObj = Docsify.dom;
+        main = domObj.getNode("#main");
+        /**
+         * render gitalk
+         */
+        if (vm.route.path.includes("zh-cn")) {
+            gitalkConfig.language = "zh-CN";
+        }
+        Array.apply(null, document.querySelectorAll("div.gitalk-container")).forEach(function(ele) {
+            ele.remove();
+        });
+        divEle = domObj.create("div");
+        divEle.id = "gitalk-container-" + label;
+        divEle.className = "gitalk-container";
+        divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
+        domObj.appendTo(domObj.find(".content"), divEle);
+        gitalk = new Gitalk(Object.assign(gitalkConfig, { id: !label ? "home" : label }));
+        gitalk.render("gitalk-container-" + label);
+    });
+};
 /**
  *  last updated plugin
  */
@@ -150,11 +151,12 @@ window.$docsify = {
         '/.*/_sidebar.md': '/_sidebar.md',
         '/.*/_navbar.md': '/_navbar.md'
     },
-    basePath: 'https://cdn.jsdelivr.net/gh/selfancy/blog@master/docs/',
-    routerMode: 'hash', // default: 'hash',
+    // basePath: 'https://cdn.jsdelivr.net/gh/selfancy/blog@master/docs/',
+    routerMode: 'history', // default: 'hash',
     auto2top: true,
     // Only coverpage is loaded when visiting the home page.
-    onlyCover: true,
+    coverpage: false,
+    onlyCover: false,
     // coverpage: true,
     loadSidebar: true,
     autoHeader: false,
@@ -164,7 +166,6 @@ window.$docsify = {
     subMaxLevel: 2,
     executeScript: true,
     name: 'selfancy 的博客',
-    nameLink: '/#/',
     repo: 'selfancy',
     formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
     search: {
@@ -213,9 +214,8 @@ window.$docsify = {
     //     url: 'https://www.selfancy.com'
     // },
     footer: {
-        copy: '<span>Acme &copy; 2020</span>',
-        auth: 'by Me',
-        pre: '',
+        copy: '<span class="copyright">Copyright &copy; 2021 | <a href="http://beian.miit.gov.cn" target="_blank" title="查看工信部网站">粤ICP备19041882号-1</a></span>',
+        auth: '<span class="copyright">by Mike</span>',
         style: 'text-align: right;',
     },
     plugins: [

@@ -75,6 +75,7 @@ html.transition, html.transition *, html.transition :after, html.transition :bef
     left: -18px;
     height: 7px;
     width: 7px;
+    top: 7px;
 }
 
 .sidebar-nav li.folder {
@@ -85,4 +86,13 @@ html.transition, html.transition *, html.transition :after, html.transition :bef
 
 aside.toc-nav {
     z-index: 10 !important;
+}
+
+.copyright {
+    font-family: sans-serif;
+    font-size: 13px;
+}
+
+.copyright a {
+    text-decoration: none !important;
 }
