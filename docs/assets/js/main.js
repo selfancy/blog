@@ -1,16 +1,16 @@
 /**
- * dark mode
+ * dark mode plugin
  */
 const darkModePlugin = (hook, vm) => {
-    var trans = () => {
+    let trans = () => {
         document.documentElement.classList.add('transition')
         window.setTimeout(() => {
             document.documentElement.classList.remove('transition')
         }, 800)
     }
-    var setColor = ({background, toggleBtnBg, textColor, themeLink }) => {
+    let setColor = ({background, toggleBtnBg, textColor, themeLink }) => {
         document.documentElement.style.setProperty('--docsify_dark_mode_btn', toggleBtnBg)
-        var themeDom = document.getElementById('theme-css');
+        let themeDom = document.getElementById('theme-css');
         if (themeDom && themeLink) {
             themeDom.setAttribute('href', themeLink);
         } else {
@@ -19,8 +19,8 @@ const darkModePlugin = (hook, vm) => {
         }
     }
 
-    var theme = { dark: {}, light: {} }
-    var defaultConfig = {
+    let theme = { dark: {}, light: {} }
+    let defaultConfig = {
         dark: {
             background: '#1c2022',
             toggleBtnBg: '#34495e',
@@ -37,69 +37,69 @@ const darkModePlugin = (hook, vm) => {
 
     theme = { ...defaultConfig, ...vm.config.darkMode }
 
-    hook.afterEach(function(html, next) {
-        var darkEl = ` <div id="dark_mode">
-             <input class="container_toggle" type="checkbox" id="switch" name="mode" />
-             <label for="switch">Toggle</label>
-           </div>`
-        html = `${darkEl}${html}`
-        next(html)
-    })
+    hook.mounted(function () {
+        /**
+         * create dom
+         */
+        let domObj = Docsify.dom;
 
-    hook.doneEach(function() {
-        var currColor
+        let darkModeDiv = domObj.create('div');
+        darkModeDiv.id = 'dark_mode';
+        domObj.appendTo(domObj.getNode('.sidebar'), darkModeDiv);
+
+        let darkModeInput = domObj.create('input');
+        darkModeInput.id = 'switch';
+        darkModeInput.name = 'mode';
+        darkModeInput.classList.add('container_toggle');
+        darkModeInput.setAttribute('type', 'checkbox');
+        domObj.appendTo(domObj.getNode('#dark_mode'), darkModeInput);
+
+        let darkModeLabel = domObj.create('label');
+        darkModeLabel.setAttribute('for', 'switch');
+        darkModeLabel.text = 'Toggle';
+        domObj.appendTo(domObj.getNode('#dark_mode'), darkModeLabel);
+        /**
+         * bind event listener
+         */
+        let currColor;
         if (localStorage.getItem('DOCSIFY_DARK_MODE')) {
             currColor = localStorage.getItem('DOCSIFY_DARK_MODE')
-            setColor(theme[`${currColor}`])
+            setColor(theme[`${currColor}`]);
         } else {
-            currColor = 'light'
-            setColor(theme.light)
+            currColor = 'light';
+            setColor(theme.light);
         }
 
-        var checkbox = document.querySelector('input[name=mode]')
+        let checkbox = document.querySelector('input[name=mode]');
 
         if (!checkbox) {
-            return
+            return;
         }
 
         checkbox.addEventListener('change', function() {
             // dark
             if (currColor === 'light') {
-                trans()
-                setColor(theme.dark)
-                localStorage.setItem('DOCSIFY_DARK_MODE', 'dark')
-                currColor = 'dark'
+                trans();
+                setColor(theme.dark);
+                localStorage.setItem('DOCSIFY_DARK_MODE', 'dark');
+                currColor = 'dark';
             } else {
-                trans()
-                setColor(theme.light)
-                localStorage.setItem('DOCSIFY_DARK_MODE', 'light')
-                currColor = 'light'
+                trans();
+                setColor(theme.light);
+                localStorage.setItem('DOCSIFY_DARK_MODE', 'light');
+                currColor = 'light';
             }
-        })
-    })
-}
-/**
- * edit on github plugin
- */
-const editOnGithubPlugin = function (hook, vm) {
-    hook.beforeEach(function (html) {
-        if (/githubusercontent\.com/.test(vm.route.file)) {
-            url = vm.route.file
-                .replace('raw.githubusercontent.com', 'github.com')
-                .replace(/\/master/, '/blob/master')
-        } else {
-            url = 'https://github.com/selfancy/blog/edit/master/docs/' + vm.route.file
-        }
-        var editHtml = '[:memo: 编辑](' + url + ')\n'
-        return editHtml + html;
+        });
     });
-};
+}
 /**
  * gitalk plugin
  */
 const gitalkConfig = {
+    // remote
     clientID: '0c1bebfe0ee17ef36a6d',
     clientSecret: 'c7e508fd3f4243f9c79262f4414ec80ef6010af6',
+    // localhost
     // clientID: '90fb80750f5bf03c8845',
     // clientSecret: 'efe7505d473f25a3dde489630e511af3e3763480',
     repo: 'blog',
@@ -108,10 +108,11 @@ const gitalkConfig = {
     distractionFreeMode: false
 };
 
-const gitalkPlugin = function (hook, vm) {
+const gitalkPlugin = (hook, vm) => {
     hook.doneEach(function() {
-        var label, domObj, main, divEle, gitalk;
-        label = vm.route.path.split("/").pop();
+        let label, domObj, main, divEle, gitalk;
+        label = vm.route.path;
+        // label = vm.route.path.split("/").pop();
         domObj = Docsify.dom;
         main = domObj.getNode("#main");
         /**
@@ -128,22 +129,31 @@ const gitalkPlugin = function (hook, vm) {
         divEle.className = "gitalk-container";
         divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
         domObj.appendTo(domObj.find(".content"), divEle);
-        gitalk = new Gitalk(Object.assign(gitalkConfig, { id: !label ? "home" : label }));
+        gitalk = new Gitalk(Object.assign(gitalkConfig, { id: !label || label === '/' ? "home" : label }));
         gitalk.render("gitalk-container-" + label);
     });
 };
 /**
- *  last updated plugin
+ *  footer plugin
  */
-const lastUpdatedPlugin = function (hook, vm) {
+const footerPlugin = (hook, vm) => {
     hook.beforeEach(function (html) {
-        return html
-            + '<hr/>'
-            + '上次更新：{docsify-updated} '
-    })
+        let url;
+        if (/githubusercontent\.com/.test(vm.route.file)) {
+            url = vm.route.file
+                .replace('raw.githubusercontent.com', 'github.com')
+                .replace(/\/master/, '/blob/master')
+        } else {
+            url = 'https://github.com/selfancy/blog/edit/master/docs' + vm.route.file
+        }
+        let editHtml = '[:memo: 编辑](' + url + ')'
+        return html + '\n<br/><hr/>' +
+            '<span class="footer" style="float: left;">上次更新：{docsify-updated}</span>' +
+            '<span class="footer" style="float: right;">' + editHtml + '</span>';
+    });
 };
 
-var num = 0;
+let num = 0;
 // default, forest, dark, neutral
 mermaid.initialize({ startOnLoad: false, theme: 'default'});
 window.$docsify = {
@@ -208,21 +218,10 @@ window.$docsify = {
             themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css'
         }
     },
-    // autoFooter: {
-    //     name: 'mike',
-    //     copyYear: '2018-2021',
-    //     url: 'https://www.selfancy.com'
-    // },
-    footer: {
-        copy: '<span class="copyright">Copyright &copy; 2021 | <a href="http://beian.miit.gov.cn" target="_blank" title="查看工信部网站">粤ICP备19041882号-1</a></span>',
-        auth: '<span class="copyright">by Mike</span>',
-        style: 'text-align: right;',
-    },
     plugins: [
-        editOnGithubPlugin,
-        gitalkPlugin,
         darkModePlugin,
-        lastUpdatedPlugin,
+        gitalkPlugin,
+        footerPlugin
     ],
     markdown: {
         renderer: {

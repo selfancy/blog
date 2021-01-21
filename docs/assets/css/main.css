@@ -63,8 +63,9 @@ html.transition, html.transition *, html.transition :after, html.transition :bef
 
 #dark_mode {
     position: absolute;
-    right: 0;
-    top: 5%;
+    bottom: 2%;
+    transform: translate(-50%, -50%);
+    left: 50%;
 }
 
 /*p {*/
@@ -88,11 +89,7 @@ aside.toc-nav {
     z-index: 10 !important;
 }
 
-.copyright {
+.footer {
     font-family: sans-serif;
     font-size: 13px;
-}
-
-.copyright a {
-    text-decoration: none !important;
 }
