@@ -178,6 +178,7 @@ window.$docsify = {
     name: 'selfancy 的博客',
     repo: 'selfancy',
     formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
+    ga: 'G-X1XNBD47LM',
     search: {
         noData: '没有结果!',
         paths: 'auto',
