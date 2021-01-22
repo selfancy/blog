@@ -2,13 +2,15 @@
   - [Hello World](java/helloworld.md)
   - [测试文章](java/next.md)
 - ![Mysql](../assets/img/mysql.svg) MySQL
-  - [Hello World](mysql/helloworld.md)
-  - [测试文章](mysql/next.md)
+  - [mysql配置详解](mysql/mysql-cnf-explain.md)
+  - [linux安装mysql](mysql/mysql-installation.md)
 - ![Linux](../assets/img/linux.svg) Linux
   - [Hello World](linux/helloworld.md)
   - [测试文章](linux/next.md)
 - ![Python](../assets/img/python.svg) Python
   - [Hello World](python/helloworld.md)
   - [测试文章](python/next.md)
-
-<div id="mb-footer"></div>
+- ![Git](../assets/img/git.svg) Git
+  - [git命令](git/git-command.md)
+- ![其它](../assets/img/others.svg) 其它
+  - [markdown语法介绍](others/markdown.md)

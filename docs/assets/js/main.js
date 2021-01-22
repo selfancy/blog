@@ -1,3 +1,10 @@
+function isDarkMode(background) {
+    if (background) {
+        return background === 'dark';
+    }
+    return localStorage.getItem('DOCSIFY_DARK_MODE') === 'dark';
+}
+
 /**
  * dark mode plugin
  */
@@ -8,7 +15,7 @@ const darkModePlugin = (hook, vm) => {
             document.documentElement.classList.remove('transition')
         }, 800)
     }
-    let setColor = ({background, toggleBtnBg, textColor, themeLink }) => {
+    let setColor = ({background, toggleBtnBg, textColor, themeLink}) => {
         document.documentElement.style.setProperty('--docsify_dark_mode_btn', toggleBtnBg)
         let themeDom = document.getElementById('theme-css');
         if (themeDom && themeLink) {
@@ -19,7 +26,7 @@ const darkModePlugin = (hook, vm) => {
         }
     }
 
-    let theme = { dark: {}, light: {} }
+    let theme = {dark: {}, light: {}}
     let defaultConfig = {
         dark: {
             background: '#1c2022',
@@ -35,7 +42,7 @@ const darkModePlugin = (hook, vm) => {
         }
     }
 
-    theme = { ...defaultConfig, ...vm.config.darkMode }
+    theme = {...defaultConfig, ...vm.config.darkMode}
 
     hook.mounted(function () {
         /**
@@ -76,18 +83,19 @@ const darkModePlugin = (hook, vm) => {
             return;
         }
 
-        checkbox.addEventListener('change', function() {
+        checkbox.addEventListener('change', function () {
             // dark
             if (currColor === 'light') {
                 trans();
-                setColor(theme.dark);
-                localStorage.setItem('DOCSIFY_DARK_MODE', 'dark');
                 currColor = 'dark';
+                setColor(theme.dark);
+                localStorage.setItem('DOCSIFY_DARK_MODE', currColor);
             } else {
                 trans();
-                setColor(theme.light);
-                localStorage.setItem('DOCSIFY_DARK_MODE', 'light');
                 currColor = 'light';
+                setColor(theme.light);
+                localStorage.setItem('DOCSIFY_DARK_MODE', currColor);
+
             }
         });
     });
@@ -109,7 +117,7 @@ const gitalkConfig = {
 };
 
 const gitalkPlugin = (hook, vm) => {
-    hook.doneEach(function() {
+    hook.doneEach(function () {
         let label, domObj, main, divEle, gitalk;
         label = vm.route.path;
         // label = vm.route.path.split("/").pop();
@@ -121,7 +129,7 @@ const gitalkPlugin = (hook, vm) => {
         if (vm.route.path.includes("zh-cn")) {
             gitalkConfig.language = "zh-CN";
         }
-        Array.apply(null, document.querySelectorAll("div.gitalk-container")).forEach(function(ele) {
+        Array.apply(null, document.querySelectorAll("div.gitalk-container")).forEach(function (ele) {
             ele.remove();
         });
         divEle = domObj.create("div");
@@ -129,7 +137,7 @@ const gitalkPlugin = (hook, vm) => {
         divEle.className = "gitalk-container";
         divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
         domObj.appendTo(domObj.find(".content"), divEle);
-        gitalk = new Gitalk(Object.assign(gitalkConfig, { id: !label || label === '/' ? "home" : label }));
+        gitalk = new Gitalk(Object.assign(gitalkConfig, {id: !label || label === '/' ? "home" : label}));
         gitalk.render("gitalk-container-" + label);
     });
 };
@@ -153,16 +161,24 @@ const footerPlugin = (hook, vm) => {
     });
 };
 
+function getMermaidTheme(mode) {
+    // default, forest, dark, neutral
+    return mode === 'dark' ? 'dark' : 'forest';
+}
+
+function resetMermaid(mode) {
+    mermaid.initialize({startOnLoad: false, theme: getMermaidTheme(mode)});
+}
+
 let num = 0;
-// default, forest, dark, neutral
-mermaid.initialize({ startOnLoad: false, theme: 'default'});
+mermaid.initialize({startOnLoad: false, theme: getMermaidTheme(localStorage.getItem('DOCSIFY_DARK_MODE'))});
 window.$docsify = {
     alias: {
         '/.*/_sidebar.md': '/_sidebar.md',
         '/.*/_navbar.md': '/_navbar.md'
     },
     // basePath: 'https://cdn.jsdelivr.net/gh/selfancy/blog@master/docs/',
-    routerMode: 'history', // default: 'hash',
+    routerMode: 'hash', // default: 'hash',
     auto2top: true,
     // Only coverpage is loaded when visiting the home page.
     coverpage: false,
@@ -173,12 +189,11 @@ window.$docsify = {
     loadNavbar: true,
     mergeNavbar: true,
     maxLevel: 2,
-    subMaxLevel: 2,
+    subMaxLevel: 1,
     executeScript: true,
     name: 'selfancy 的博客',
     repo: 'selfancy',
     formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
-    ga: 'G-X1XNBD47LM',
     search: {
         noData: '没有结果!',
         paths: 'auto',
@@ -199,11 +214,11 @@ window.$docsify = {
         tocMaxLevel: 5,
         target: "h2, h3, h4, h5, h6",
     },
-    count:{
-        countable:true,
-        fontsize:'0.9em',
-        color:'rgb(90,90,90)',
-        language:'chinese'
+    count: {
+        countable: true,
+        fontsize: '0.9em',
+        color: 'rgb(90,90,90)',
+        language: 'chinese'
     },
     darkMode: {
         light: {
