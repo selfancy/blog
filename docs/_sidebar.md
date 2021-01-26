@@ -14,3 +14,6 @@
   - [git命令](git/git-command.md)
 - ![其它](../assets/img/others.svg) 其它
   - [markdown语法介绍](others/markdown.md)
+  - [github实用统计图标](others/github-stats.md)
+  - [github建站指南](others/github-pages.md)
+  - [阿里云公共DNS](others/alidns.md)

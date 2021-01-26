@@ -108,12 +108,14 @@ Markdown 标记区块只需要在整个段落的第一行最前面加上 『>』
 - [ ] a task list item
 - [ ] list syntax required
 - [ ] normal **formatting**, @mentions, #1234 refs
-- [ ] incomplete - [x] completed
+- [ ] incomplete
+- [x] completed
 ```
 - [ ] a task list item
 - [ ] list syntax required
 - [ ] normal **formatting**, @mentions, #1234 refs
-- [ ] incomplete - [x] completed
+- [ ] incomplete
+- [x] completed
 
 ### 2.6 代码块
 #### 2.6.1 单行代码
@@ -256,14 +258,16 @@ Bob-->John: Jolly good!
 可以通过`+` `-`来增减 激活态 :
 ````markdown
 ```mermaid
-sequenceDiagram Alice->>+John: 帮我叫下外卖
+sequenceDiagram
+Alice->>+John: 帮我叫下外卖
 John->>+elme: 来一份外卖
 elme-->>-John: OK
 John-->>-Alice: 叫好了
 ```
 ````
 ```mermaid
-sequenceDiagram Alice->>+John: 帮我叫下外卖
+sequenceDiagram
+Alice->>+John: 帮我叫下外卖
 John->>+elme: 来一份外卖
 elme-->>-John: OK
 John-->>-Alice: 叫好了
