@@ -4,6 +4,7 @@
 - ![Mysql](../assets/img/mysql.svg) MySQL
   - [mysql配置详解](mysql/mysql-cnf-explain.md)
   - [linux安装mysql](mysql/mysql-installation.md)
+  - [Explain详解与索引最佳实践](mysql/mysql-explain.md)
 - ![Linux](../assets/img/linux.svg) Linux
   - [Hello World](linux/helloworld.md)
   - [测试文章](linux/next.md)
@@ -12,6 +13,9 @@
   - [测试文章](python/next.md)
 - ![Git](../assets/img/git.svg) Git
   - [git命令](git/git-command.md)
+- ![Docker](../assets/img/docker.svg) Docker
+  - [docker入门及使用](docker/docker.md)
+  - [docker-compose介绍](docker/docker-compose.md)
 - ![其它](../assets/img/others.svg) 其它
   - [markdown语法介绍](others/markdown.md)
   - [github实用统计图标](others/github-stats.md)

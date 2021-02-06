@@ -178,6 +178,7 @@ window.$docsify = {
         '/.*/_navbar.md': '/_navbar.md'
     },
     // basePath: 'https://cdn.jsdelivr.net/gh/selfancy/blog@master/docs/',
+    // basePath: 'https://raw.githubusercontent.com/selfancy/blog/master/docs/',
     routerMode: 'hash', // default: 'hash',
     auto2top: true,
     // Only coverpage is loaded when visiting the home page.
@@ -225,13 +226,13 @@ window.$docsify = {
             background: '#1c2022',
             toggleBtnBg: '#34495e',
             textColor: '#b4b4b4',
-            themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css'
+            themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple.css'
         },
         dark: {
             background: 'white',
             toggleBtnBg: 'var(--theme-color)',
             textColor: 'var(--theme-color)',
-            themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css'
+            themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple-dark.css'
         }
     },
     plugins: [
