@@ -174,4 +174,139 @@ key_len计算规则如下：
 索引最大长度是768字节，当字符串过长时，mysql会做一个类似左前缀索引的处理，将前半部分的字符提取出来做索引。
 
 #### 8. ref列
-[笔记](https://note.youdao.com/ynoteshare1/index.html?id=5b590cb82e7819dd439f8d0d27d2e8a7&type=note)
+这一列显示了在key列记录的索引中，表查找值所用到的列或常量，常见的有：const（常量），字段名（例：film.id）
+
+#### 9. rows列
+这一列是mysql估计要读取并检测的行数，注意这个不是结果集里的行数。
+
+#### 10. Extra列
+这一列展示的是额外信息。常见的重要值如下：
+
+- **Using index**：查询的列被索引覆盖，并且where筛选条件**是索引的前导列**，是性能高的表现。一般是使用了覆盖索引(索引包含了所有查询的字段)。对于innodb来说，如果是辅助索引性能会有不少提高
+
+  mysql> explain select film_id from film_actor where film_id = 1;
+  ![](../assets/img/38f89f28.png)
+- **Using where**：查询的列未被索引覆盖，where筛选条件非索引的前导列
+
+  mysql> explain select * from actor where name = 'a';
+  ![](../assets/img/7d4250a2.png)
+- **Using where Using index**：查询的列被索引覆盖，并且**where筛选条件是索引列之一但是不是索引的前导列**，意味着无法直接通过索引查找来查询到符合条件的数据
+
+  mysql> explain select film_id from film_actor where actor_id = 1;
+  ![](../assets/img/791dd618.png)
+- **NULL**：查询的列未被索引覆盖，并且where筛选条件是索引的前导列，意味着用到了索引，但是部分字段未被索引覆盖，必须通过“回表”来实现，不是纯粹地用到了索引，也不是完全没用到索引
+
+  mysql>explain select * from film_actor where film_id = 1;
+  ![](../assets/img/c243d9f1.png)
+- **Using index condition**：与Using where类似，查询的列不完全被索引覆盖，where条件中是一个前导列的范围；
+
+  mysql> explain select * from film_actor where film_id > 1;
+  ![](../assets/img/38296a60.png)
+- **Using temporary**：mysql需要创建一张临时表来处理查询。出现这种情况一般是要进行优化的，首先是想到用索引来优化。
+
+  1. actor.name没有索引，此时创建了张临时表来distinct mysql> explain select distinct name from actor;
+  ![](../assets/img/26bdcdaa.png)
+  2. film.name建立了idx_name索引，此时查询时extra是using index,没有用临时表 mysql> explain select distinct name from film;
+  ![](../assets/img/8ba7e5c0.png)
+- **Using filesort**：mysql 会对结果使用一个外部索引排序，而不是按索引次序从表里读取行。此时mysql会根据联接类型浏览所有符合条件的记录，并保存排序关键字和行指针，然后排序关键字并按顺序检索行信息。这种情况下一般也是要考虑使用索引来优化的。
+
+  1. actor.name未创建索引，会浏览actor整个表，保存排序关键字name和对应的id，然后排序name并检索行记录
+  mysql> explain select * from actor order by name;
+  ![](../assets/img/52c0da20.png)
+  2. film.name建立了idx_name索引,此时查询时extra是using indexmysql> explain select * from film order by name; 
+  ![](../assets/img/32d9160b.png)
+     
+### 索引最佳实践
+**使用的表**
+```sql
+CREATE TABLE `employees` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(24) NOT NULL DEFAULT '' COMMENT '姓名',
+  `age` int(11) NOT NULL DEFAULT '0' COMMENT '年龄',
+  `position` varchar(20) NOT NULL DEFAULT '' COMMENT '职位',
+  `hire_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '入职时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_name_age_position` (`name`,`age`,`position`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='员工记录表';
+
+INSERT INTO employees(name,age,position,hire_time) VALUES('LiLei',22,'manager',NOW());
+INSERT INTO employees(name,age,position,hire_time) VALUES('HanMeimei', 23,'dev',NOW());
+INSERT INTO employees(name,age,position,hire_time) VALUES('Lucy',23,'dev',NOW());
+```
+**最佳实践**
+- **1.全值匹配**
+  
+  EXPLAIN SELECT * FROM employees WHERE name= 'LiLei';
+  ![](../assets/img/a048ca9a.png)
+
+  EXPLAIN SELECT * FROM employees WHERE name= 'LiLei' AND age = 22;
+  ![](../assets/img/98f1bad1.png)
+
+  EXPLAIN SELECT * FROM employees WHERE name= 'LiLei' AND age = 22 AND position ='manager';
+  ![](../assets/img/c4c21752.png)
+- **2.最佳左前缀法则**
+
+  如果索引了多列，要遵守最左前缀法则。指的是查询从索引的最左前列开始并且不跳过索引中的列。
+  
+  EXPLAIN SELECT * FROM employees WHERE age = 22 AND position ='manager';
+  
+  EXPLAIN SELECT * FROM employees WHERE position = 'manager';
+  
+  EXPLAIN SELECT * FROM employees WHERE name = 'LiLei';
+  ![](../assets/img/3af8dc1e.png)
+- **3.不在索引列上做任何操作（计算、函数、（自动or手动）类型转换），会导致索引失效而转向全表扫描**
+
+  EXPLAIN SELECT * FROM employees WHERE name = 'LiLei';
+  
+  EXPLAIN SELECT * FROM employees WHERE left(name,3) = 'LiLei';
+  ![](../assets/img/20830e9d.png)
+- **4.存储引擎不能使用索引中范围条件右边的列**
+
+  EXPLAIN SELECT * FROM employees WHERE name= 'LiLei' AND age = 22 AND position ='manager';
+  
+  EXPLAIN SELECT * FROM employees WHERE name= 'LiLei' AND age > 22 AND position ='manager';
+  ![](../assets/img/983d273b.png)
+- **5.尽量使用覆盖索引（只访问索引的查询（索引列包含查询列）），减少select \* 语句**
+
+  EXPLAIN SELECT name,age FROM employees WHERE name= 'LiLei' AND age = 23 AND position ='manager';
+  ![](../assets/img/1007bfe0.png)
+
+  EXPLAIN SELECT * FROM employees WHERE name= 'LiLei' AND age = 23 AND position ='manager';
+  ![](../assets/img/ec5c13b6.png)
+- **6.mysql在使用不等于（！=或者<>）的时候无法使用索引会导致全表扫描**
+
+  EXPLAIN SELECT * FROM employees WHERE name != 'LiLei'
+  ![](../assets/img/2f56b586.png)
+- **7.is null,is not null 也无法使用索引**
+
+  EXPLAIN SELECT * FROM employees WHERE name is null
+  ![](../assets/img/04aa91a0.png)
+- **8.like以通配符开头（'$abc...'）mysql索引失效会变成全表扫描操作**
+
+  EXPLAIN SELECT * FROM employees WHERE name like '%Lei'
+  ![](../assets/img/ec0a95f8.png)
+
+  EXPLAIN SELECT * FROM employees WHERE name like 'Lei%'
+  ![](../assets/img/bcd74ff0.png)
+
+  问题：解决like'%字符串%'索引不被使用的方法？
+  - 使用覆盖索引，查询字段必须是建立覆盖索引字段
+
+    EXPLAIN SELECT name,age,position FROM employees WHERE name like '%Lei%';
+    ![](../assets/img/5fc06309.png)
+  - 当覆盖索引指向的字段是varchar(380)及380以上的字段时，覆盖索引会失效！
+- **9.字符串不加单引号索引失效**
+
+  EXPLAIN SELECT * FROM employees WHERE name = '1000';
+  
+  EXPLAIN SELECT * FROM employees WHERE name = 1000;
+  ![](../assets/img/b4c3e28b.png)
+- **10.少用or,用它连接时很多情况下索引会失效**
+
+  EXPLAIN SELECT * FROM employees WHERE name = 'LiLei' or name = 'HanMeimei';
+  ![](../assets/img/32e929d2.png)
+
+### 总结
+  ![](../assets/img/c941216f.png)
+
+  like KK%相当于=常量，%KK和%KK% 相当于范围
