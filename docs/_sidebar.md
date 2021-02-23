@@ -1,6 +1,6 @@
 - ![Java](../assets/img/java.svg) Java
   - [Java 面试突击](java/java-interview-highlights.md)
-  - [测试文章](java/next.md)
+  - [JVM GC调优](java/jvm-gc.md)
 - ![Mysql](../assets/img/mysql.svg) MySQL
   - [mysql配置详解](mysql/mysql-cnf-explain.md)
   - [linux安装mysql](mysql/mysql-installation.md)
