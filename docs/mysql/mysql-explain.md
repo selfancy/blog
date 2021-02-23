@@ -215,11 +215,11 @@ key_len计算规则如下：
   ![](../assets/img/52c0da20.png)
   2. film.name建立了idx_name索引,此时查询时extra是using indexmysql> explain select * from film order by name; 
   ![](../assets/img/32d9160b.png)
-     
+
 ### 索引最佳实践
 **使用的表**
 ```sql
-CREATE TABLE `employees` (
+CREATE TABLE `emplowyees` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(24) NOT NULL DEFAULT '' COMMENT '姓名',
   `age` int(11) NOT NULL DEFAULT '0' COMMENT '年龄',

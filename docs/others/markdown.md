@@ -202,6 +202,9 @@ Left | Center | Right Left | Center | Right
 \. | \\. | 英文句号
 \! | \\! | 感叹号
 
+### 2.12 数学符号
+![](../assets/img/bfdc8a20.png)
+
 ## 3 Mermaid
 > Mermaid 是一个用于画流程图、状态图、时序图、甘特图的库，使用 JS 进行本地渲染，广泛集成于许多
 > 

@@ -190,7 +190,7 @@ window.$docsify = {
     loadNavbar: true,
     mergeNavbar: true,
     maxLevel: 2,
-    subMaxLevel: 1,
+    subMaxLevel: 3,
     executeScript: true,
     name: 'selfancy 的博客',
     repo: 'selfancy',
