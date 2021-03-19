@@ -15,17 +15,20 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css"/>
 <!--    <link rel="stylesheet" href="//raw.githubusercontent.com/selfancy/blog/master/docs/assets/css/main.css">-->
+<!--    <link rel="stylesheet" href="assets/css/dmaku.css">-->
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body>
 <div id="app">加载中 ...</div>
 
+<script src="//cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify-themeable/dist/js/docsify-themeable.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
 <!--<script src="//raw.githubusercontent.com/selfancy/blog/master/docs/assets/js/main.js"></script>-->
+<script src="assets/js/dmaku.js"></script>
 <script src="assets/js/main.js"></script>
 
 <!-- plugins -->
@@ -54,9 +57,26 @@
 <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-xml-doc.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
 
+<script src="//l2dwidget.js.org/lib/L2Dwidget.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-X1XNBD47LM"></script>
+<script async src="//www.googletagmanager.com/gtag/js?id=G-X1XNBD47LM"></script>
 <script>
+    L2Dwidget.init({
+        model: {
+            jsonPath: "//cdn.jsdelivr.net/npm/live2d-widget-model-koharu/assets/koharu.model.json",
+            scale: 1
+        },
+        display: {
+            position: "right",
+            width: 150,
+            height: 300,
+            hOffset: 100,
+            vOffset: 0
+        },
+        mobile: {show: false, scale: 0.5},
+        debug: false
+    });
+
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -64,5 +84,4 @@
     gtag('config', 'G-X1XNBD47LM');
 </script>
 </body>
-
 </html>
