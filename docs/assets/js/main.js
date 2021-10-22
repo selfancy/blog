@@ -66,8 +66,13 @@ const darkModePlugin = (hook, vm) => {
             currColor = localStorage.getItem('DOCSIFY_DARK_MODE')
             setColor(theme[`${currColor}`]);
         } else {
-            currColor = 'light';
-            setColor(theme.light);
+            let hours = new Date().getHours();
+            if (hours >= 6 && hours < 18) {
+                currColor = 'light';
+            } else {
+                currColor = 'dark'
+            }
+            setColor(theme[`${currColor}`]);
         }
 
         let checkbox = document.querySelector('input[name=mode]');
@@ -144,7 +149,7 @@ const footerPlugin = (hook, vm) => {
                 .replace('raw.githubusercontent.com', 'github.com')
                 .replace(/\/master/, '/blob/master')
         } else {
-            url = 'https://github.com/selfancy/blog/edit/master/docs' + vm.route.file
+            url = 'https://github.com/selfancy/blog/edit/master/docs/' + vm.route.file
         }
         let editHtml = '[:memo: 编辑](' + url + ')'
         return html + '\n<br/><hr/>' +
