@@ -248,7 +248,9 @@ window.$docsify = {
 };
 
 window.onload = function () {
-    $('.sidebar').append('<br><div style="position: absolute;bottom: 13%;left: 25%;font-size: 14px;">' +
+    $('.sidebar').append('' +
+        '<div class="beian">' +
+        '<span>&copy2021 selfancy</span><br>' +
         '<a href="http://beian.miit.gov.cn/" target="_blank">湘ICP备17012000号-2</a>' +
         '</div>');
 }
