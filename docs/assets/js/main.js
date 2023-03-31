@@ -43,21 +43,25 @@ const darkModePlugin = (hook, vm) => {
          */
         let domObj = Docsify.dom;
 
+        let sidebarFooterDiv = domObj.create('div');
+        sidebarFooterDiv.classList = 'sidebar-footer';
+
         let darkModeDiv = domObj.create('div');
         darkModeDiv.id = 'dark_mode';
-        domObj.appendTo(domObj.getNode('.sidebar'), darkModeDiv);
+        domObj.appendTo(sidebarFooterDiv, darkModeDiv);
+        domObj.appendTo(domObj.getNode('.sidebar'), sidebarFooterDiv);
 
         let darkModeInput = domObj.create('input');
         darkModeInput.id = 'switch';
         darkModeInput.name = 'mode';
         darkModeInput.classList.add('container_toggle');
         darkModeInput.setAttribute('type', 'checkbox');
-        domObj.appendTo(domObj.getNode('#dark_mode'), darkModeInput);
+        domObj.appendTo(darkModeDiv, darkModeInput);
 
         let darkModeLabel = domObj.create('label');
         darkModeLabel.setAttribute('for', 'switch');
         darkModeLabel.text = 'Toggle';
-        domObj.appendTo(domObj.getNode('#dark_mode'), darkModeLabel);
+        domObj.appendTo(darkModeDiv, darkModeLabel);
         /**
          * bind event listener
          */
@@ -110,7 +114,8 @@ const gitalkConfig = {
     repo: 'blog',
     owner: 'selfancy',
     admin: ['selfancy'],
-    distractionFreeMode: false
+    distractionFreeMode: false,
+    proxy: '/github/login'
 };
 
 const gitalkPlugin = (hook, vm) => {
@@ -170,7 +175,7 @@ window.$docsify = {
         '/.*/_sidebar.md': '/_sidebar.md',
         '/.*/_navbar.md': '/_navbar.md'
     },
-    // basePath: 'https://cdn.jsdelivr.net/gh/selfancy/blog@master/docs/',
+    // basePath: 'https://gcore.jsdelivr.net/gh/selfancy/blog@master/docs/',
     // basePath: 'https://raw.githubusercontent.com/selfancy/blog/master/docs/',
     routerMode: 'hash', // default: 'hash',
     auto2top: true,
@@ -183,7 +188,7 @@ window.$docsify = {
     loadNavbar: true,
     mergeNavbar: true,
     maxLevel: 2,
-    subMaxLevel: 3,
+    subMaxLevel: 2,
     executeScript: true,
     name: 'selfancy 的博客',
     repo: 'selfancy',
@@ -219,13 +224,13 @@ window.$docsify = {
             background: '#1c2022',
             toggleBtnBg: '#34495e',
             textColor: '#b4b4b4',
-            themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple.css'
+            themeLink: '//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple.css'
         },
         dark: {
             background: 'white',
             toggleBtnBg: 'var(--theme-color)',
             textColor: 'var(--theme-color)',
-            themeLink: '//cdn.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple-dark.css'
+            themeLink: '//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple-dark.css'
         }
     },
     plugins: [
@@ -248,7 +253,7 @@ window.$docsify = {
 };
 
 window.onload = function () {
-    $('.sidebar').append('' +
+    $('.sidebar-footer').append('' +
         '<div class="beian">' +
         '<span>&copy2021 selfancy</span><br>' +
         '<a href="http://beian.miit.gov.cn/" target="_blank">湘ICP备17012000号-2</a>' +

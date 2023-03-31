@@ -9,11 +9,12 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.png"/>
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple.min.css" id="theme-css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css"/>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex/dist/katex.min.css"/>
+    <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple.min.css" id="theme-css">
+    <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-plugin-toc/dist/light.min.css"/>
+    <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css"/>
+    <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/gitalk/dist/gitalk.min.css">
+    <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+    <link rel="stylesheet" href="//gcore.jsdelivr.net/npm/katex/dist/katex.min.css"/>
 <!--    <link rel="stylesheet" href="//raw.githubusercontent.com/selfancy/blog/master/docs/assets/css/main.css">-->
 <!--    <link rel="stylesheet" href="assets/css/dmaku.css">-->
     <link rel="stylesheet" href="assets/css/main.css">
@@ -22,48 +23,48 @@
 <body>
 <div id="app">加载中 ...</div>
 
-<script src="//cdn.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-themeable/dist/js/docsify-themeable.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/jquery@1.11.3/dist/jquery.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify-themeable/dist/js/docsify-themeable.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
 <!--<script src="//raw.githubusercontent.com/selfancy/blog/master/docs/assets/js/main.js"></script>-->
 <script src="assets/js/dmaku.js"></script>
 <script src="assets/js/main.js"></script>
 
 <!-- plugins -->
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-plugin-toc/dist/docsify-plugin-toc.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-count/dist/countable.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-katex/dist/docsify-katex.js"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify-tabs"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify-copy-code"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify-plugin-toc/dist/docsify-plugin-toc.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify-count/dist/countable.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify-katex/dist/docsify-katex.js"></script>
+<script src="//gcore.jsdelivr.net/npm/docsify-tabs"></script>
 
 <!-- code highlight -->
-<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-csharp.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-json.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-nginx.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-properties.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-xml-doc.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/prismjs/components/prism-csharp.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/prismjs/components/prism-json.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/prismjs/components/prism-markdown.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/prismjs/components/prism-nginx.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/prismjs/components/prism-properties.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/prismjs/components/prism-sql.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/prismjs/components/prism-xml-doc.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
 
-<script src="//cdn.jsdelivr.net/npm/live2d-widget/lib/L2Dwidget.min.js"></script>
+<script src="//gcore.jsdelivr.net/npm/live2d-widget/lib/L2Dwidget.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="//www.googletagmanager.com/gtag/js?id=G-X1XNBD47LM"></script>
 <script>
     L2Dwidget.init({
         model: {
-            jsonPath: "//cdn.jsdelivr.net/npm/live2d-widget-model-koharu/assets/koharu.model.json",
+            jsonPath: "//gcore.jsdelivr.net/npm/live2d-widget-model-koharu/assets/koharu.model.json",
             scale: 1
         },
         display: {

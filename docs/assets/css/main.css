@@ -1,10 +1,5 @@
 html {
     font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "5B8B4F53", simsun, sans-serif;
-    /*color: #666;*/
-    /*background: #eee url(../img/bg3.gif) left top;*/
-    /* background-repeat: repeat-y; */
-    /* background-size: 100%; */
-    /*text-shadow: 1px 1px 1px #ddd;*/
 }
 
 :root {
@@ -71,21 +66,18 @@ html.transition, html.transition *, html.transition :after, html.transition :bef
 }
 
 #dark_mode {
-    /*position: absolute;*/
-    /*bottom: 8%;*/
-    /*transform: translate(-50%, -50%);*/
-    /*left: 50%;*/
-    order: 2;
-    bottom: 0;
-    text-align: center;
-    position: relative;
-    transform: translateY(35vh);
+    margin: 30px 0 30px 0;
 }
 
-/*p {*/
-/*    color: var(--theme-color);*/
-/*    color: var(--text_color)*/
-/*}*/
+.sidebar-nav {
+    flex-grow: 1;
+}
+
+.sidebar-footer {
+    order: 1;
+    margin-bottom: 35px;
+}
+
 .sidebar-nav ul:not(.app-sub-sidebar)>li:not(.file)::before {
     left: -18px;
     height: 7px;
@@ -109,15 +101,7 @@ aside.toc-nav {
 }
 
 .beian {
-    /*position: inherit;*/
-    /*bottom: 2%;*/
-    /*left: 25%;*/
-    font-size: 13px;
     text-align: center;
-    order: 3;
-    bottom: 0;
-    position: relative;
-    transform: translateY(38vh);
 }
 
 .beian > a {
@@ -128,3 +112,4 @@ aside.toc-nav {
 .beian > a:hover {
     color: #222;
 }
+
