@@ -251,8 +251,11 @@ window.$docsify = {
             image: function (href, title, text) {
                 let imgName = href.substring(href.lastIndexOf('/') + 1);
                 if (imgName.startsWith('sidebar-')) {
-                    if (href.startsWith('./')) {
-                        href = '.' + href;
+                    let url = new URL(location.href);
+                    if (url.pathname !== '/') {
+                        if (url.hash.length > 2) {
+                            href = '../' + href;
+                        }
                     } else {
                         href = '../' + href
                     }
