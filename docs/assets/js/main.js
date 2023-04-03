@@ -8,7 +8,7 @@ const darkModePlugin = (hook, vm) => {
             document.documentElement.classList.remove('transition')
         }, 800)
     }
-    let setColor = ({background, toggleBtnBg, textColor, themeLink}) => {
+    let setColor = ({background, toggleBtnBg, textColor, themeLink, tocNavBg}) => {
         document.documentElement.style.setProperty('--docsify_dark_mode_btn', toggleBtnBg)
         let themeDom = document.getElementById('theme-css');
         if (themeDom && themeLink) {
@@ -16,6 +16,11 @@ const darkModePlugin = (hook, vm) => {
         } else {
             document.documentElement.style.setProperty('--docsify_dark_mode_bg', background)
             document.documentElement.style.setProperty('--text_color', textColor)
+        }
+        // document.querySelector('aside.toc-nav').style.setProperty('background', tocNavBg);
+        let $tovNav = document.querySelector('aside.toc-nav');
+        if ($tovNav) {
+            $tovNav.style.background = tocNavBg;
         }
     }
 
@@ -25,13 +30,15 @@ const darkModePlugin = (hook, vm) => {
             background: '#1c2022',
             toggleBtnBg: '#34495e',
             textColor: '#b4b4b4',
-            themeLink: ''
+            themeLink: '',
+            tocNavBg: 'hsl( 201 , 18% , 35%)'
         },
         light: {
             background: 'white',
             toggleBtnBg: 'var(--theme-color)',
             textColor: 'var(--theme-color)',
-            themeLink: ''
+            themeLink: '',
+            tocNavBg: '#fff'
         }
     }
 
@@ -180,7 +187,7 @@ window.$docsify = {
     routerMode: 'hash', // default: 'hash',
     auto2top: true,
     // Only coverpage is loaded when visiting the home page.
-    coverpage: false,
+    coverpage: true,
     onlyCover: false,
     // coverpage: true,
     loadSidebar: true,
@@ -215,22 +222,24 @@ window.$docsify = {
     },
     count: {
         countable: true,
+        // float: 'left',
         fontsize: '0.9em',
-        color: 'rgb(90,90,90)',
-        language: 'chinese'
+        color: 'rgb(90,90,90)'
     },
     darkMode: {
-        light: {
-            background: '#1c2022',
-            toggleBtnBg: '#34495e',
-            textColor: '#b4b4b4',
-            themeLink: '//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple.css'
-        },
         dark: {
             background: 'white',
             toggleBtnBg: 'var(--theme-color)',
             textColor: 'var(--theme-color)',
-            themeLink: '//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple-dark.css'
+            themeLink: '//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple-dark.css',
+            tocNavBg: 'hsl( 201 , 18% , 35%)'
+        },
+        light: {
+            background: '#1c2022',
+            toggleBtnBg: '#34495e',
+            textColor: '#b4b4b4',
+            themeLink: '//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple.css',
+            tocNavBg: '#fff'
         }
     },
     plugins: [
