@@ -222,7 +222,6 @@ window.$docsify = {
     },
     count: {
         countable: true,
-        // float: 'left',
         fontsize: '0.9em',
         color: 'rgb(90,90,90)'
     },

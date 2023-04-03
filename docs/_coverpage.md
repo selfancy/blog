@@ -29,7 +29,7 @@
       <!--<i class="layui-icon" style="color: #FBDAC7; color: rgba(255,255,255,.5);">&#xe600;</i>-->
     </div>
     <div class="site-desc site-desc-anim">
-      <span style="color: #fff;font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;"><span style="color:#CDFF5D;">Selfancy的个人博客网站</span></span>
+      <span style="color: #fff;font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;"><span style="color:#CDFF5D;">Selfancy的个人博客</span></span>
       <cite>记录
         <span style="color:#fff;">学习笔记</span>、
         <span style="color:#fff;">技术相关问题</span>、
@@ -39,7 +39,7 @@
     </div>
     <div class="site-download">
       <a href="https://github.com/selfancy" class="site-down" target="_blank">Github</a>
-      <a onclick="document.documentElement.scrollTop=document.querySelector('main').offsetTop" class="site-down" target="_blank">快速开始</a> 
+      <a onclick="document.documentElement.scrollTop=document.querySelector('main').offsetTop;document.querySelector('.cover').classList.replace('show', 'hide')" class="site-down" target="_blank">快速开始</a> 
     </div>
   </div>
 </div>

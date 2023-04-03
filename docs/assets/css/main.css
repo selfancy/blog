@@ -121,12 +121,6 @@ aside.toc-nav {
     color: #222;
 }
 
-@media only screen and (max-width: 1299px) {
-    aside.toc-nav {
-        max-width: 20px;
-    }
-}
-
 .gt-container {
     margin: 0 20px;
 }
@@ -575,7 +569,7 @@ aside.toc-nav {
     position: relative;
     margin: 0 auto;
     transform-style: preserve-3d;
-    height: 0px;
+    height: 0;
 }
 
 .sun {
@@ -754,7 +748,7 @@ aside.toc-nav {
 
 .site-download a {
     position: relative;
-    text-decoration: none;
+    text-decoration: none !important;
     cursor: pointer;
     padding: 5px 25px;
     margin: 0 5px;
@@ -778,4 +772,31 @@ aside.toc-nav {
     left: 45px;
     padding-top: 2px;
     font-size: 30px;
+}
+
+@media only screen and (max-width: 1299px) {
+    aside.toc-nav {
+        max-width: 20px;
+    }
+    .site-zfj {
+        padding-top: 60px;
+    }
+    .site-desc {
+        font-size: 28px;
+    }
+    .wrapper {
+        margin-top: 50%;
+    }
+    .sun .star {
+        width: 150px;
+        height: 150px;
+    }
+    .jupiter .planet {
+        width: 50px;
+        height: 50px;
+    }
+    .earth .planet {
+        width: 25px;
+        height: 25px;
+    }
 }
