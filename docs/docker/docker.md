@@ -29,9 +29,9 @@ yum remove -y docker \
 
 ### 2.2 安装 docker
 ```shell
-yum install -y yum-utils device-mapper-persistent-data lvm2 \
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo \
-yum-config-manager --disable docker-ce-edge \
+yum install -y yum-utils device-mapper-persistent-data lvm2 && \
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && \
+yum-config-manager --disable docker-ce-edge && \
 yum install -y docker-ce
 ```
 
@@ -50,13 +50,13 @@ docker默认数据存储目录为：/var/lib/docker
 假设挂载点在 /data 路径。
 ```shell
 # 首先停掉 docker 服务
-systemctl stop docker \
+systemctl stop docker
 # 创建新存储目录
-mkdir -p /data/docker \
+mkdir -p /data/docker
 # 然后移动整个 /var/lib/docker 目录到新存储目录
-mv /var/lib/docker /root/data/docker \
+mv /var/lib/docker /root/data/docker
 # 做软连接
-ln -s /data/docker /var/lib/docker \
+ln -s /data/docker /var/lib/docker
 # 启动docker服务
 systemctl start docker
 ```
