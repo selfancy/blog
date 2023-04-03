@@ -1,23 +1,23 @@
-- ![Java](./assets/img/sidebar-java.svg) Java
+- ![Java](assets/img/sidebar-java.svg) Java
   - [Java 面试突击](java/java-interview-highlights.md)
   - [Java 面试合集](java/java-interview-collection.md)
   - [JVM GC调优](java/jvm-gc.md)
-- ![Mysql](./assets/img/sidebar-mysql.svg) MySQL
+- ![Mysql](assets/img/sidebar-mysql.svg) MySQL
   - [mysql配置详解](mysql/mysql-cnf-explain.md)
   - [linux安装mysql](mysql/mysql-installation.md)
   - [Explain详解与索引最佳实践](mysql/mysql-explain.md)
-- ![Linux](./assets/img/sidebar-linux.svg) Linux
+- ![Linux](assets/img/sidebar-linux.svg) Linux
   - [Hello World](linux/helloworld.md)
   - [测试文章](linux/next.md)
-- ![Python](./assets/img/sidebar-python.svg) Python
+- ![Python](assets/img/sidebar-python.svg) Python
   - [Hello World](python/helloworld.md)
   - [测试文章](python/next.md)
-- ![Git](./assets/img/sidebar-git.svg) Git
+- ![Git](assets/img/sidebar-git.svg) Git
   - [git命令](git/git-command.md)
-- ![Docker](./assets/img/sidebar-docker.svg) Docker
+- ![Docker](assets/img/sidebar-docker.svg) Docker
   - [docker入门及使用](docker/docker.md)
   - [docker-compose介绍](docker/docker-compose.md)
-- ![其它](./assets/img/sidebar-others.svg) 其它
+- ![其它](assets/img/sidebar-others.svg) 其它
   - [markdown语法介绍](others/markdown.md)
   - [github实用统计图标](others/github-stats.md)
   - [github建站指南](others/github-pages.md)
