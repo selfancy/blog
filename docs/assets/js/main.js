@@ -247,6 +247,17 @@ window.$docsify = {
                     );
                 }
                 return this.origin.code.apply(this, arguments);
+            },
+            image: function (href, title, text) {
+                let imgName = href.substring(href.lastIndexOf('/') + 1);
+                if (imgName.startsWith('sidebar-')) {
+                    if (href.startsWith('./')) {
+                        href = '.' + href;
+                    } else {
+                        href = '../' + href
+                    }
+                }
+                return this.origin.image.apply(this, [href, title, text]);
             }
         }
     }
