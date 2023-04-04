@@ -7,6 +7,7 @@
  ****************************************************************/
 $(document).ready(function () {
     var canvas = document.getElementById("c");
+    if (!canvas) return;
     var ctx = canvas.getContext("2d");
     var c = $("#c");
     var x, y, w, h, cx, cy, l;

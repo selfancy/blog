@@ -39,7 +39,7 @@
     </div>
     <div class="site-download">
       <a href="https://github.com/selfancy" class="site-down" target="_blank">Github</a>
-      <a onclick="document.documentElement.scrollTop=document.querySelector('main').offsetTop;document.querySelector('.cover').classList.replace('show', 'hide')" class="site-down" target="_blank">快速开始</a> 
+      <a onclick="showMainContent()" class="site-down" target="_blank">快速开始</a> 
     </div>
   </div>
 </div>

@@ -12,6 +12,14 @@ html {
     --sidebar-nav-pagelink-background-image--loaded: inherit !important;
 }
 
+main, .app-nav, .github-corner {
+    display: none;
+}
+
+.gitalk-container {
+    width: inherit !important;
+}
+
 .markdown-section {
     max-width: 80%;
     padding: 30px 15px 40px 15px;

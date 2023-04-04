@@ -1,3 +1,4 @@
+- <a href="/">Home</a>
 - 入门
   - [Hello World](java/helloworld.md)
   - [多页文档](java/next.md)

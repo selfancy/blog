@@ -17,7 +17,6 @@ const darkModePlugin = (hook, vm) => {
             document.documentElement.style.setProperty('--docsify_dark_mode_bg', background)
             document.documentElement.style.setProperty('--text_color', textColor)
         }
-        // document.querySelector('aside.toc-nav').style.setProperty('background', tocNavBg);
         let $tovNav = document.querySelector('aside.toc-nav');
         if ($tovNav) {
             $tovNav.style.background = tocNavBg;
@@ -274,10 +273,22 @@ window.$docsify = {
     }
 };
 
+function showMainContent() {
+    document.documentElement.scrollTop = document.querySelector('main').offsetTop;
+    $('.cover').toggleClass('show', 'hide');
+    $('main,.app-nav,.github-corner').show();
+}
+
 window.onload = function () {
     $('.sidebar-footer').append('' +
         '<div class="beian">' +
         '<span>&copy2021 selfancy</span><br>' +
         '<a href="http://beian.miit.gov.cn/" target="_blank">湘ICP备17012000号-2</a>' +
         '</div>');
+
+    let url = new URL(location.href);
+    if (url.hash.length > 2) {
+        $('.cover').toggleClass('hide', 'hide');
+        $('main,.app-nav,.github-corner').show();
+    }
 }

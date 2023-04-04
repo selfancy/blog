@@ -66,21 +66,28 @@
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="//www.googletagmanager.com/gtag/js?id=G-X1XNBD47LM"></script>
 <script>
-    L2Dwidget.init({
-        model: {
-            jsonPath: "//gcore.jsdelivr.net/npm/live2d-widget-model-koharu/assets/koharu.model.json",
-            scale: 1
-        },
-        display: {
-            position: "right",
-            width: 150,
-            height: 300,
-            hOffset: 100,
-            vOffset: 0
-        },
-        mobile: {show: false, scale: 0.5},
-        debug: false
-    });
+    L2Dwidget
+        .on("create-container", function() {
+            $('#live2d-widget').hide();
+        })
+        .on("create-canvas", function() {
+            $('#live2d-widget').show();
+        })
+        .init({
+            model: {
+                jsonPath: "//gcore.jsdelivr.net/npm/live2d-widget-model-koharu/assets/koharu.model.json",
+                scale: 1
+            },
+            display: {
+                position: "right",
+                width: 150,
+                height: 300,
+                hOffset: 100,
+                vOffset: 0
+            },
+            mobile: {show: false, scale: 0.5},
+            debug: false,
+        });
 
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
