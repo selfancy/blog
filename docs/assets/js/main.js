@@ -291,4 +291,12 @@ window.onload = function () {
         $('.cover').toggleClass('hide', 'hide');
         $('main,.app-nav,.github-corner').show();
     }
+
+    let links = document.querySelectorAll("a");
+    for(let i in links) {
+        let link = links[i];
+        if (link.tagName === "A" && link.getAttribute("href").startsWith("http")) {
+            link.setAttribute("target", "_blank");
+        }
+    }
 }

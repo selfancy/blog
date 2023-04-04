@@ -4,7 +4,7 @@
 
 在 select 语句之前增加 explain 关键字，MySQL 会在查询上设置一个标记，执行查询时，会返回执行计划的信息，而不是执行这条SQL（如果 from  中包含子查询，仍会执行该子查询，将结果放入临时表中）
 
-### 使用的表
+## 使用的表
 ```sql
 DROP TABLE IF EXISTS `actor`;
 CREATE TABLE `actor` (
@@ -52,10 +52,10 @@ explain 有两个变种：
   ![](../assets/img/4a05bb77.png)
 - 2、**explain partitions**：相比 explain 多了个 partitions 字段，如果查询是基于分区表的话，会显示查询将访问的分区。
 
-### explain 中的列
+## explain 中的列
 接下来我们将展示 explain 中每个列的信息。
 
-#### 1. id列
+### 1. id列
 > id列的编号是 select 的序列号，有几个 select 就有几个id，并且id的顺序是按 select 出现的顺序增长的。MySQL将 select 查询分为简单查询(SIMPLE)和复杂查询(PRIMARY)。
 > 复杂查询分为三类：简单子查询、派生表（from语句中的子查询）、union 查询。
 > id列越大执行优先级越高，id相同则从上往下执行，id为NULL最后执行
@@ -75,7 +75,7 @@ explain 有两个变种：
   ![](../assets/img/c1512eb1.png)
   union结果总是放在一个匿名临时表中，临时表不在SQL中出现，因此它的id是NULL。
   
-#### 2. select_type列
+### 2. select_type列
 > select_type 表示对应行是简单还是复杂的查询，如果是复杂的查询，又是上述三种复杂查询中的哪一种。
 
 - **simple**：简单查询。查询不包含子查询和union
@@ -97,12 +97,12 @@ explain 有两个变种：
   mysql> explain select 1 union all select 1;
   ![](../assets/img/aadfc5ef.png)
   
-#### 3. table列
+### 3. table列
 > 这一列表示 explain 的一行正在访问哪个表。
 > 当 from 子句中有子查询时，table列是<derivenN>格式，表示当前查询依赖 id=N 的查询，于是先执行 id=N 的查询。
 > 当有 union 时，UNION RESULT 的 table 列的值为<union1,2>，1和2表示参与 union 的 select 行id。
 
-#### 4. type列
+### 4. type列
 > 这一列表示关联类型或访问类型，即MySQL决定如何查找表中的行，查找数据行记录的大概范围。
 > 依次从最优到最差分别为：system > const > eq_ref > ref > range > index > ALL
 > 一般来说，得保证查询达到range级别，最好达到ref
@@ -141,16 +141,16 @@ explain 有两个变种：
   mysql> explain select * from actor;
   ![](../assets/img/cf9a8f32.png)
   
-#### 5. possible_keys列
+### 5. possible_keys列
 > 这一列显示查询可能使用哪些索引来查找。
 > explain 时可能出现 possible_keys 有列，而 key 显示 NULL 的情况，这种情况是因为表中数据不多，mysql认为索引对此查询帮助不大，选择了全表查询。
 > 如果该列是NULL，则没有相关的索引。在这种情况下，可以通过检查 where 子句看是否可以创造一个适当的索引来提高查询性能，然后用 explain 查看效果。
 
-#### 6. key列
+### 6. key列
 > 这一列显示mysql实际采用哪个索引来优化对该表的访问。
 > 如果没有使用索引，则该列是 NULL。如果想强制mysql使用或忽视possible_keys列中的索引，在查询中使用 force index、ignore index。
 
-#### 7. key_len列
+### 7. key_len列
 > 这一列显示了mysql在索引里使用的字节数，通过这个值可以算出具体使用了索引中的哪些列。
 > 举例来说，film_actor的联合索引 idx_film_actor_id 由 film_id 和 actor_id 两个int列组成，并且每个int是4字节。通过结果中的key_len=4可推断出查询使用了第一个列：film_id列来执行索引查找。\
 
@@ -173,13 +173,13 @@ key_len计算规则如下：
 
 索引最大长度是768字节，当字符串过长时，mysql会做一个类似左前缀索引的处理，将前半部分的字符提取出来做索引。
 
-#### 8. ref列
+### 8. ref列
 这一列显示了在key列记录的索引中，表查找值所用到的列或常量，常见的有：const（常量），字段名（例：film.id）
 
-#### 9. rows列
+### 9. rows列
 这一列是mysql估计要读取并检测的行数，注意这个不是结果集里的行数。
 
-#### 10. Extra列
+### 10. Extra列
 这一列展示的是额外信息。常见的重要值如下：
 
 - **Using index**：查询的列被索引覆盖，并且where筛选条件**是索引的前导列**，是性能高的表现。一般是使用了覆盖索引(索引包含了所有查询的字段)。对于innodb来说，如果是辅助索引性能会有不少提高
@@ -216,7 +216,7 @@ key_len计算规则如下：
   2. film.name建立了idx_name索引,此时查询时extra是using indexmysql> explain select * from film order by name; 
   ![](../assets/img/32d9160b.png)
 
-### 索引最佳实践
+## 索引最佳实践
 **使用的表**
 ```sql
 CREATE TABLE `emplowyees` (
@@ -306,7 +306,7 @@ INSERT INTO employees(name,age,position,hire_time) VALUES('Lucy',23,'dev',NOW())
   EXPLAIN SELECT * FROM employees WHERE name = 'LiLei' or name = 'HanMeimei';
   ![](../assets/img/32e929d2.png)
 
-### 总结
+## 总结
   ![](../assets/img/c941216f.png)
 
   like KK%相当于=常量，%KK和%KK% 相当于范围

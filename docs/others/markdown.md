@@ -1,6 +1,6 @@
-# Markdown 语法介绍 <!-- {docsify-ignore-all} -->
+# Markdown 语法介绍
 
-## 1 Markdown
+## 1 介绍
 > Markdown是一种具有纯文本格式语法的轻量级标记语言。它的设计使得它可以使用同名工具转换为HTML和许多其他格式。使用Markdown，可以让写作者专注于写作而不用关注样式。
 
 支持Markdown的常用应用：
@@ -21,12 +21,12 @@ Markdown 共支持六级标题。如下所示：
 ##### 五级标题
 ###### 六级标题
 ```
-# 一级标题
-## 二级标题
-### 三级标题
-#### 四级标题
-##### 五级标题
-###### 六级标题
+# 一级标题<!-- {docsify-ignore} -->
+## 二级标题<!-- {docsify-ignore} -->
+### 三级标题<!-- {docsify-ignore} -->
+#### 四级标题<!-- {docsify-ignore} -->
+##### 五级标题<!-- {docsify-ignore} -->
+###### 六级标题<!-- {docsify-ignore} -->
 
 ### 2.2 强调
 在Markdown中，可以使用 * 和 _ 来表示斜体和加粗。
@@ -64,7 +64,7 @@ Markdown 标记区块只需要在整个段落的第一行最前面加上 『>』
 
 引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：
 ```markdown
-> ## 标题
+> ## 标题<!-- {docsify-ignore} -->
 > - 这是第一行列表项。
 > - 这是第二行列表项。
 >
@@ -72,7 +72,7 @@ Markdown 标记区块只需要在整个段落的第一行最前面加上 『>』
 >
 > `return true;`
 ```
-> ## 标题
+> ## 标题<!-- {docsify-ignore} -->
 > - 这是第一行列表项。
 > - 这是第二行列表项。
 >
@@ -170,7 +170,7 @@ Left | Center | Right Left | Center | Right
 ---
 这是分隔线下部分内容
 ```
-这是分隔线上部分内容
+这是分隔线上部分内容<!-- {docsify-ignore} -->
 ---
 这是分隔线下部分内容
 
@@ -205,7 +205,7 @@ Left | Center | Right Left | Center | Right
 ### 2.12 数学符号
 ![](../assets/img/bfdc8a20.png)
 
-## 3 Mermaid
+# 3 Mermaid
 > Mermaid 是一个用于画流程图、状态图、时序图、甘特图的库，使用 JS 进行本地渲染，广泛集成于许多
 > 
 > Markdown 编辑器中。[Mermaid GitBook](https://mermaid-js.github.io/mermaid/#/)
@@ -215,8 +215,8 @@ Left | Center | Right Left | Center | Right
 - gitlab
 - stackedit
 
-### 3.1 时序图
-#### 3.1.1 基本语法
+## 3.1 时序图
+### 3.1.1 基本语法
 ```markdown
 [参加者][箭头][参加者]:消息
 ```
@@ -231,21 +231,21 @@ Left | Center | Right Left | Center | Right
 -x | 有箭头的带X的实线 (通常用来表示异步)
 --x | 有箭头的带X的虚线 (通常用来表示异步)
 
-#### 3.1.2 参加者
+### 3.1.2 参加者
 可以通过 participant 定义参加者，参加者的顺序可以决定渲染出来的节点的顺序：
 ```markdown
 participant 参加者A
 participant 参加者B
 ```
 
-#### 3.1.3 别名
+### 3.1.3 别名
 可以通过 as 给参加者定义别名:
 ```markdown
 participant A as 参加者A
 participant B as 参加者B
 ```
 
-#### 3.1.4 消息
+### 3.1.4 消息
 用来标识参加者之间的消息，基本语法
 ```markdown
 [参加者][箭头][参加者]:消息
@@ -271,7 +271,7 @@ John->Bob: How about you?
 Bob-->John: Jolly good!
 ```
 
-#### 3.1.5 激活
+### 3.1.5 激活
 > 激活(Activation) : 代表时序图中对象执行一项操作的时期, 激活期可以理解为语义中 {} 中的内容, 表示该对象被占用以完成某个任务;
 
 可以通过`+` `-`来增减 激活态 :
@@ -292,7 +292,7 @@ elme-->>-John: OK
 John-->>-Alice: 叫好了
 ```
 
-#### 3.1.6 注释
+### 3.1.6 注释
 可以给时序图添加注释，语法：
 ```
 [ right of | left of | over ] [参加者]: 文本
@@ -310,7 +310,7 @@ Alice->John: Hello John, how are you?
 Note over Alice,John: A typical interaction
 ```
 
-#### 3.1.7 循环
+### 3.1.7 循环
 可以定义循环视图，语法如下：
 ```
 loop text
@@ -335,7 +335,7 @@ John-->Alice: Great!
 end
 ```
 
-#### 3.1.8 备选项
+### 3.1.8 备选项
 通过以下语法可以添加备选项视图：
 ```
 alt Describing text
@@ -375,7 +375,7 @@ Bob->>Alice: Thanks for asking
 end
 ```
 
-#### 3.1.9 简单示例
+### 3.1.9 简单示例
 ````markdown
 ```mermaid
 sequenceDiagram
@@ -389,8 +389,8 @@ Alice->>John: Hello John, how are you?
 John-->>Alice: Great!
 ```
 
-### 3.2 流程图
-#### 3.2.1 图表方向
+## 3.2 流程图
+### 3.2.1 图表方向
 Mermaid 支持多种图表的方向，语法如下：
 ```
 graph 方向描述
@@ -404,7 +404,7 @@ BT | 从下到上
 RL | 从右到左
 LR | 从左到右
 
-#### 3.2.2 节点定义
+### 3.2.2 节点定义
 > 流程图中每个文本块，包括开始、结束、处理、判断等。Mermaid 中每个节点都有一个 id，以及节点的文字。
 
 节点定义:
@@ -418,7 +418,7 @@ LR | 从左到右
 `id{文字}` | 菱形节点
 文字内容为可选内容，如果不填，默认将id当名字
 
-#### 3.2.3 节点间的连线
+### 3.2.3 节点间的连线
 类型 | 描述
 --- | ---
 `---` | 无箭头的实线
@@ -430,7 +430,7 @@ LR | 从左到右
 `-- This is the text ---`或`---\|This is the text\|` | 可以插入文本的无箭头的实线
 `-->\|text\|` 或 `-- text -->` | 可以插入文本的有箭头的实线
 
-#### 3.2.4 简单示例
+### 3.2.4 简单示例
 ````markdown
 ```mermaid
 graph TD
@@ -448,7 +448,7 @@ graph TD
 不吃早饭-->上班
 ```
 
-#### 3.2.5 子图表
+### 3.2.5 子图表
 语法：
 ```
 subgraph title
@@ -487,7 +487,7 @@ c1-->c2
 end
 ```
 
-### 3.3 甘特图
+## 3.3 甘特图
 > 由于甘特图实际使用比较少，而且语法相对复杂，这边只做展示，不进行具体展开
 > 可以查看 [Gant diagrams](https://mermaid-js.github.io/mermaid/#/gantt) 文档获取详细操作
 
@@ -528,10 +528,10 @@ section 寒梅没
 将要做的 :1d
 ```
 
-## 4 Typora
+# 4 Typora
 > [Typora](https://www.typora.io/) 是一款轻便简洁的跨平台Markdown编辑器，支持即时渲染技术，这也是与其他Markdown编辑器最显著的区别。
 
-### 4.1 时序图
+## 4.1 时序图
 > 由`js-sequence`提供支持，将代码块转换为渲染图
 
 基本语法：
@@ -565,7 +565,7 @@ Note right of Bob: Bob thinks
 Bob-->Alice: I am good thanks!
 ```
 
-### 4.2 流程图
+## 4.2 流程图
 > 由`flowchart.js`提供支持，将代码块转换为渲染图
 
 ````markdown
@@ -591,7 +591,7 @@ cond(yes)->e
 cond(no)->op
 ```
 
-### 4.3 其他
+## 4.3 其他
 - Table of Contents (TOC)
 - 支持嵌入HTML直接渲染
 - 便捷的表格工具
