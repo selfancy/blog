@@ -1,4 +1,16 @@
 /**
+ * mermaid plugin
+ */
+const loadMermaid = () => {
+    // default, forest, dark, neutral
+    let getMermaidTheme = (mode) => mode === 'dark' ? 'dark' : 'forest';
+    mermaid.initialize({startOnLoad: false, theme: getMermaidTheme(localStorage.getItem('DOCSIFY_DARK_MODE'))});
+}
+const mermaidPlugin = (hook, vm) => {
+    hook.init(loadMermaid);
+}
+
+/**
  * dark mode plugin
  */
 const darkModePlugin = (hook, vm) => {
@@ -6,21 +18,7 @@ const darkModePlugin = (hook, vm) => {
         document.documentElement.classList.add('transition')
         window.setTimeout(() => {
             document.documentElement.classList.remove('transition')
-        }, 800)
-    }
-    let setColor = ({background, toggleBtnBg, textColor, themeLink, tocNavBg}) => {
-        document.documentElement.style.setProperty('--docsify_dark_mode_btn', toggleBtnBg)
-        let themeDom = document.getElementById('theme-css');
-        if (themeDom && themeLink) {
-            themeDom.setAttribute('href', themeLink);
-        } else {
-            document.documentElement.style.setProperty('--docsify_dark_mode_bg', background)
-            document.documentElement.style.setProperty('--text_color', textColor)
-        }
-        let $tovNav = document.querySelector('aside.toc-nav');
-        if ($tovNav) {
-            $tovNav.style.background = tocNavBg;
-        }
+        }, 800);
     }
 
     let theme = {dark: {}, light: {}}
@@ -41,8 +39,42 @@ const darkModePlugin = (hook, vm) => {
         }
     }
 
-    theme = {...defaultConfig, ...vm.config.darkMode}
-
+    theme = {...defaultConfig, ...vm.config.darkMode};
+    let changeDarkMode = (mode) => {
+        let cacheMode = localStorage.getItem('DOCSIFY_DARK_MODE');
+        let currMode = document.documentElement.getAttribute('data-theme');
+        if ((cacheMode != null && currMode == null) || mode !== currMode) {
+            let modeTheme = theme[`${mode}`];
+            document.documentElement.style.setProperty('--docsify_dark_mode_btn', modeTheme.toggleBtnBg)
+            let themeDom = document.getElementById('theme-css');
+            if (themeDom && modeTheme.themeLink) {
+                themeDom.setAttribute('href', modeTheme.themeLink);
+            } else {
+                document.documentElement.style.setProperty('--docsify_dark_mode_bg', modeTheme.background)
+                document.documentElement.style.setProperty('--text_color', modeTheme.textColor)
+            }
+            let $tovNav = document.querySelector('aside.toc-nav');
+            if ($tovNav) {
+                $tovNav.style.background = modeTheme.tocNavBg;
+            }
+            document.documentElement.setAttribute('data-theme', mode);
+            localStorage.setItem('DOCSIFY_DARK_MODE', mode);
+        }
+    }
+    hook.init(function () {
+        let currMode;
+        if (localStorage.getItem('DOCSIFY_DARK_MODE')) {
+            changeDarkMode(localStorage.getItem('DOCSIFY_DARK_MODE'));
+        } else {
+            let hours = new Date().getHours();
+            if (hours >= 6 && hours < 18) {
+                currMode = 'light';
+            } else {
+                currMode = 'dark';
+            }
+            changeDarkMode(currMode);
+        }
+    });
     hook.mounted(function () {
         /**
          * create dom
@@ -71,40 +103,15 @@ const darkModePlugin = (hook, vm) => {
         /**
          * bind event listener
          */
-        let currColor;
-        if (localStorage.getItem('DOCSIFY_DARK_MODE')) {
-            currColor = localStorage.getItem('DOCSIFY_DARK_MODE')
-            setColor(theme[`${currColor}`]);
-        } else {
-            let hours = new Date().getHours();
-            if (hours >= 6 && hours < 18) {
-                currColor = 'light';
-            } else {
-                currColor = 'dark'
-            }
-            setColor(theme[`${currColor}`]);
-        }
-
         let checkbox = document.querySelector('input[name=mode]');
-
-        if (!checkbox) {
-            return;
+        if (checkbox) {
+            checkbox.addEventListener('change', function () {
+                let currMode = localStorage.getItem('DOCSIFY_DARK_MODE');
+                trans();
+                currMode = currMode === 'light' ? 'dark' : 'light';
+                changeDarkMode(currMode);
+            });
         }
-
-        checkbox.addEventListener('change', function () {
-            // dark
-            if (currColor === 'light') {
-                trans();
-                currColor = 'dark';
-                setColor(theme.dark);
-                localStorage.setItem('DOCSIFY_DARK_MODE', currColor);
-            } else {
-                trans();
-                currColor = 'light';
-                setColor(theme.light);
-                localStorage.setItem('DOCSIFY_DARK_MODE', currColor);
-            }
-        });
     });
 }
 /**
@@ -169,13 +176,26 @@ const footerPlugin = (hook, vm) => {
     });
 };
 
-function getMermaidTheme(mode) {
-    // default, forest, dark, neutral
-    return mode === 'dark' ? 'dark' : 'forest';
+/**
+ * copyright plugin
+ */
+const copyrightPlugin = (hook, vm) => {
+    hook.mounted(function () {
+        $('.sidebar-footer').append('' +
+            '<div class="beian">' +
+            '<span>&copy2021 selfancy</span><br>' +
+            '<a href="http://beian.miit.gov.cn/" target="_blank">湘ICP备17012000号-2</a>' +
+            '</div>');
+
+        let url = new URL(location.href);
+        if (url.hash.length > 2) {
+            $('.cover').toggleClass('hide', 'hide');
+            $('main,.app-nav,.github-corner').show();
+        }
+    });
 }
 
 let num = 0;
-mermaid.initialize({startOnLoad: false, theme: getMermaidTheme(localStorage.getItem('DOCSIFY_DARK_MODE'))});
 window.$docsify = {
     alias: {
         '/.*/_sidebar.md': '/_sidebar.md',
@@ -185,7 +205,6 @@ window.$docsify = {
     // basePath: 'https://raw.githubusercontent.com/selfancy/blog/master/docs/',
     routerMode: 'hash', // default: 'hash',
     auto2top: true,
-    // Only coverpage is loaded when visiting the home page.
     coverpage: true,
     onlyCover: false,
     // coverpage: true,
@@ -241,9 +260,11 @@ window.$docsify = {
         }
     },
     plugins: [
+        mermaidPlugin,
         darkModePlugin,
         gitalkPlugin,
-        footerPlugin
+        footerPlugin,
+        copyrightPlugin
     ],
     markdown: {
         renderer: {
@@ -277,26 +298,4 @@ function showMainContent() {
     document.documentElement.scrollTop = document.querySelector('main').offsetTop;
     $('.cover').toggleClass('show', 'hide');
     $('main,.app-nav,.github-corner').show();
-}
-
-window.onload = function () {
-    $('.sidebar-footer').append('' +
-        '<div class="beian">' +
-        '<span>&copy2021 selfancy</span><br>' +
-        '<a href="http://beian.miit.gov.cn/" target="_blank">湘ICP备17012000号-2</a>' +
-        '</div>');
-
-    let url = new URL(location.href);
-    if (url.hash.length > 2) {
-        $('.cover').toggleClass('hide', 'hide');
-        $('main,.app-nav,.github-corner').show();
-    }
-
-    let links = document.querySelectorAll("a");
-    for(let i in links) {
-        let link = links[i];
-        if (link.tagName === "A" && link.getAttribute("href").startsWith("http")) {
-            link.setAttribute("target", "_blank");
-        }
-    }
 }
