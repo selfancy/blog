@@ -2,6 +2,7 @@
   - [Java 面试突击](java/java-interview-highlights.md)
   - [Java 面试合集](java/java-interview-collection.md)
   - [JVM GC调优](java/jvm-gc.md)
+  - [HikariCP配置优化](java/hikaricp-configuration.md)
 - ![Mysql](assets/img/sidebar-mysql.svg) MySQL
   - [mysql配置详解](mysql/mysql-cnf-explain.md)
   - [linux安装mysql](mysql/mysql-installation.md)
