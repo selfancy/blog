@@ -376,23 +376,23 @@ aside.toc-nav {
 
 @keyframes shadow {
     0% {
-        background-position: 130% 0%;
+        background-position: 130% 0;
     }
 
     33% {
-        background-position: 50% 0%;
+        background-position: 50% 0;
     }
 
     55% {
-        background-position: 0% 0%;
+        background-position: 0 0;
     }
 
     80% {
-        background-position: -50% 0%;
+        background-position: -50% 0;
     }
 
     100% {
-        background-position: -50% 0%;
+        background-position: -50% 0;
     }
 }
 
@@ -564,9 +564,8 @@ aside.toc-nav {
 /* scene wrapper */
 .wrapper {
     position: relative;
-    margin: 0 auto;
     display: block;
-    margin-top: 62px;
+    margin: 62px auto 0;
     width: inherit;
     perspective: 1000px;
     perspective-origin: 60% 50%;
@@ -583,7 +582,7 @@ aside.toc-nav {
 .sun {
     width: 250px;
     position: absolute;
-    top: 0px;
+    top: 0;
     z-index: 1;
     height: 125px !important;
 }
@@ -608,11 +607,11 @@ aside.toc-nav {
 
 .shadow {
     position: absolute;
-    left: 0px;
-    right: 0px;
-    top: 0px;
-    bottom: 0px;
-    background: transparent url(../img/3d/shadow.png) 0% 0% no-repeat;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: transparent url(../img/3d/shadow.png) 0 0 no-repeat;
     background-size: cover;
     border-radius: 100%;
 }
@@ -703,8 +702,8 @@ aside.toc-nav {
 }
 
 .jupiter .planet {
-    width: 128px;
-    height: 128px;
+    width: 105px;
+    height: 105px;
     background-image: url(../img/3d/jupiter.png);
     animation: anti-spin 50s infinite linear;
 }

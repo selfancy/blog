@@ -1,4 +1,4 @@
-- [Home](/ ':ignore')
+- [Home](/ ':ignore :target=_self')
 - 入门
   - [Hello World](java/helloworld.md)
   - [多页文档](java/next.md)
