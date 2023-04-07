@@ -18,41 +18,38 @@ const darkModePlugin = (hook, vm) => {
         document.documentElement.classList.add('transition')
         window.setTimeout(() => {
             document.documentElement.classList.remove('transition')
-        }, 800);
+        }, 300);
     }
-
-    let theme = {dark: {}, light: {}}
-    let defaultConfig = {
+    let theme = {
         dark: {
             background: '#1c2022',
-            toggleBtnBg: '#34495e',
+            toggleBtnBg: 'var(--theme-color)',
             textColor: '#b4b4b4',
-            themeLink: '',
+            themeLink: '//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple-dark.css',
             tocNavBg: 'hsl( 201 , 18% , 35%)'
         },
         light: {
             background: 'white',
-            toggleBtnBg: 'var(--theme-color)',
+            toggleBtnBg: '#34495e',
             textColor: 'var(--theme-color)',
-            themeLink: '',
+            themeLink: '//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple.css',
             tocNavBg: '#fff'
         }
     }
-
-    theme = {...defaultConfig, ...vm.config.darkMode};
-    let changeDarkMode = (mode) => {
+    // theme = {...defaultConfig, ...vm.config.darkMode};
+    let changeDarkMode = (mode, changeTheme) => {
         let cacheMode = localStorage.getItem('DOCSIFY_DARK_MODE');
         let currMode = document.documentElement.getAttribute('data-theme');
         if ((cacheMode != null && currMode == null) || mode !== currMode) {
             let modeTheme = theme[`${mode}`];
-            document.documentElement.style.setProperty('--docsify_dark_mode_btn', modeTheme.toggleBtnBg)
             let themeDom = document.getElementById('theme-css');
-            if (themeDom && modeTheme.themeLink) {
+            if (themeDom && modeTheme.themeLink && changeTheme) {
                 themeDom.setAttribute('href', modeTheme.themeLink);
             } else {
                 document.documentElement.style.setProperty('--docsify_dark_mode_bg', modeTheme.background)
                 document.documentElement.style.setProperty('--text_color', modeTheme.textColor)
             }
+            document.documentElement.style.setProperty('--docsify_dark_mode_btn', modeTheme.toggleBtnBg)
             let $tovNav = document.querySelector('aside.toc-nav');
             if ($tovNav) {
                 $tovNav.style.background = modeTheme.tocNavBg;
@@ -61,23 +58,9 @@ const darkModePlugin = (hook, vm) => {
             localStorage.setItem('DOCSIFY_DARK_MODE', mode);
         }
     }
-    hook.init(function () {
-        let currMode;
-        if (localStorage.getItem('DOCSIFY_DARK_MODE')) {
-            changeDarkMode(localStorage.getItem('DOCSIFY_DARK_MODE'));
-        } else {
-            let hours = new Date().getHours();
-            if (hours >= 6 && hours < 18) {
-                currMode = 'light';
-            } else {
-                currMode = 'dark';
-            }
-            changeDarkMode(currMode);
-        }
-    });
     hook.mounted(function () {
         /**
-         * create dom
+         * create dark-mode dom
          */
         let domObj = Docsify.dom;
 
@@ -100,18 +83,30 @@ const darkModePlugin = (hook, vm) => {
         darkModeLabel.setAttribute('for', 'switch');
         darkModeLabel.text = 'Toggle';
         domObj.appendTo(darkModeDiv, darkModeLabel);
+        // init mode
+        let currMode;
+        if (localStorage.getItem('DOCSIFY_DARK_MODE')) {
+            currMode = localStorage.getItem('DOCSIFY_DARK_MODE');
+        } else {
+            let hours = new Date().getHours();
+            if (hours >= 6 && hours < 18) {
+                currMode = 'light';
+            } else {
+                currMode = 'dark';
+            }
+        }
+        if (currMode === 'dark') {
+            darkModeInput.checked = true;
+        }
+        changeDarkMode(currMode, currMode === 'dark');
         /**
          * bind event listener
          */
-        let checkbox = document.querySelector('input[name=mode]');
-        if (checkbox) {
-            checkbox.addEventListener('change', function () {
-                let currMode = localStorage.getItem('DOCSIFY_DARK_MODE');
-                trans();
-                currMode = currMode === 'light' ? 'dark' : 'light';
-                changeDarkMode(currMode);
-            });
-        }
+        darkModeInput.addEventListener('change', function () {
+            trans();
+            let mode = localStorage.getItem('DOCSIFY_DARK_MODE') === 'dark' ? 'light' : 'dark';
+            changeDarkMode(mode, true);
+        });
     });
 }
 /**
@@ -247,16 +242,12 @@ window.$docsify = {
         dark: {
             background: 'white',
             toggleBtnBg: 'var(--theme-color)',
-            textColor: 'var(--theme-color)',
-            themeLink: '//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple-dark.css',
-            tocNavBg: 'hsl( 201 , 18% , 35%)'
+            textColor: 'var(--theme-color)'
         },
         light: {
             background: '#1c2022',
             toggleBtnBg: '#34495e',
-            textColor: '#b4b4b4',
-            themeLink: '//gcore.jsdelivr.net/npm/docsify-themeable/dist/css/theme-simple.css',
-            tocNavBg: '#fff'
+            textColor: '#b4b4b4'
         }
     },
     plugins: [
