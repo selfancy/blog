@@ -290,3 +290,8 @@ function showMainContent() {
     $('.cover').toggleClass('show', 'hide');
     $('main,.app-nav,.github-corner').show();
 }
+
+window.addEventListener('visibilitychange', function() {
+    document.querySelector('head > title').innerHTML = document.hidden ? "😡死鬼，去哪浪了！" : "selfancy的博客";
+});
+
