@@ -122,8 +122,7 @@ const gitalkConfig = {
     repo: 'blog',
     owner: 'selfancy',
     admin: ['selfancy'],
-    distractionFreeMode: false,
-    proxy: '/github/login'
+    distractionFreeMode: false
 };
 
 const gitalkPlugin = (hook, vm) => {
