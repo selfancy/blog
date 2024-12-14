@@ -210,7 +210,7 @@ window.$docsify = {
     maxLevel: 2,
     subMaxLevel: 2,
     executeScript: true,
-    name: 'selfancy 的博客',
+    name: 'selfancy 之家',
     repo: 'selfancy',
     formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}:{ss}',
     search: {
@@ -292,6 +292,6 @@ function showMainContent() {
 }
 
 window.addEventListener('visibilitychange', function() {
-    document.querySelector('head > title').innerHTML = document.hidden ? "😡死鬼，去哪浪了！" : "selfancy的博客";
+    document.querySelector('head > title').innerHTML = document.hidden ? "😡死鬼，去哪浪了！" : "selfancy之家";
 });
 

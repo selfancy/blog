@@ -29,7 +29,7 @@
       <!--<i class="layui-icon" style="color: #FBDAC7; color: rgba(255,255,255,.5);">&#xe600;</i>-->
     </div>
     <div class="site-desc site-desc-anim">
-      <span style="color: #fff;font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;"><span style="color:#CDFF5D;">Selfancy的个人博客</span></span>
+      <span style="color: #fff;font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;"><span style="color:#CDFF5D;">Selfancy之家</span></span>
       <cite>记录
         <span style="color:#fff;">学习笔记</span>、
         <span style="color:#fff;">技术相关问题</span>、
@@ -42,4 +42,8 @@
       <a onclick="showMainContent()" class="site-down" target="_blank">快速开始</a> 
     </div>
   </div>
+  <p style="position: absolute;bottom: 2px;left: 50%;transform: translateX(-50%);margin: 0;">
+      <span>©2021 selfancy</span>&nbsp;&nbsp;
+      <a style="text-decoration: none;" href="http://beian.miit.gov.cn/" target="_blank">湘ICP备17012000号-2</a>
+  </p>
 </div>
