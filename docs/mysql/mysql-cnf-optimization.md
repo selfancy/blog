@@ -16,6 +16,8 @@ skip_ssl
 
 slow_query_log=ON
 long_query_time=2
+#log_queries_not_using_indexes=ON
+slow_query_log_file=/var/log/mysql/slow-query.log
 
 log_bin=ON
 binlog_format=ROW
