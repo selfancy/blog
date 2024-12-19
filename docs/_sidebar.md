@@ -16,6 +16,7 @@
   - [测试文章](python/next.md)
 - ![Git](assets/img/sidebar-git.svg) Git
   - [git命令](git/git-command.md)
+  - [git配置代理](git/git-http-proxy.md)
 - ![Docker](assets/img/sidebar-docker.svg) Docker
   - [docker入门及使用](docker/docker.md)
   - [docker-compose介绍](docker/docker-compose.md)
